@@ -1,0 +1,287 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        06/03/2017  14:30:18  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+F:\KEIL5\C51\BIN\BL51.EXE eeprom.obj, main.obj TO eeprom RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  eeprom.obj (EEPROM)
+  main.obj (MAIN)
+  F:\KEIL5\C51\LIB\C51S.LIB (?C_STARTUP)
+  F:\KEIL5\C51\LIB\C51S.LIB (?C?COPY)
+  F:\KEIL5\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  eeprom (EEPROM)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0017H     UNIT         _DATA_GROUP_
+            DATA    001FH     0004H     UNIT         ?DT?MAIN
+            IDATA   0023H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     00F6H     UNIT         ?C?LIB_CODE
+            CODE    00F9H     00B9H     UNIT         ?PR?MAIN?MAIN
+            CODE    01B2H     008CH     UNIT         ?C_C51STARTUP
+            CODE    023EH     0019H     UNIT         ?PR?_DELAYXMS?MAIN
+            CODE    0257H     0017H     UNIT         ?PR?_EEPROMREADBYTE?EEPROM
+            CODE    026EH     0016H     UNIT         ?PR?_EEPROMWRITEBYTE?EEPROM
+            CODE    0284H     0016H     UNIT         ?CO?MAIN
+            CODE    029AH     0014H     UNIT         ?PR?_EEPROMERASESECTOR?EEPROM
+            CODE    02AEH     0013H     UNIT         ?PR?UARTINIT?MAIN
+            CODE    02C1H     000DH     UNIT         ?PR?EEPROMCLOSE?EEPROM
+            CODE    02CEH     0009H     UNIT         ?C_INITSEG
+            CODE    02D7H     0008H     UNIT         ?PR?_SENDDATA?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   eeprom (EEPROM)
+
+
+SEGMENT                                 DATA_GROUP 
+  +--> CALLED SEGMENT                 START    LENGTH
+-----------------------------------------------------
+?C_C51STARTUP                         -----    -----
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN                         0008H    0017H
+  +--> ?CO?MAIN
+  +--> ?PR?UARTINIT?MAIN
+  +--> ?PR?_DELAYXMS?MAIN
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/03/2017  14:30:18  PAGE 2
+
+
+  +--> ?PR?_EEPROMERASESECTOR?EEPROM
+  +--> ?PR?_EEPROMWRITEBYTE?EEPROM
+  +--> ?PR?_EEPROMREADBYTE?EEPROM
+  +--> ?PR?_SENDDATA?MAIN
+
+?PR?_EEPROMERASESECTOR?EEPROM         -----    -----
+  +--> ?PR?EEPROMCLOSE?EEPROM
+
+?PR?_EEPROMWRITEBYTE?EEPROM           -----    -----
+  +--> ?PR?EEPROMCLOSE?EEPROM
+
+?PR?_EEPROMREADBYTE?EEPROM            -----    -----
+  +--> ?PR?EEPROMCLOSE?EEPROM
+
+
+
+SYMBOL TABLE OF MODULE:  eeprom (EEPROM)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        EEPROM
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  C:0257H         PUBLIC        _EepromReadByte
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00C0H         PUBLIC        P4
+  D:00C8H         PUBLIC        P5
+  D:00E8H         PUBLIC        P6
+  D:00F8H         PUBLIC        P7
+  D:00A8H         PUBLIC        IE
+  D:00C5H         PUBLIC        IAP_CMD
+  C:026EH         PUBLIC        _EepromWriteByte
+  D:00B8H         PUBLIC        IP
+  D:00C3H         PUBLIC        IAP_ADDRH
+  D:00D8H         PUBLIC        CCON
+  D:00C4H         PUBLIC        IAP_ADDRL
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:00C7H         PUBLIC        IAP_CONTR
+  C:029AH         PUBLIC        _EepromEraseSector
+  D:00C2H         PUBLIC        IAP_DATA
+  C:02C1H         PUBLIC        EepromClose
+  D:00C6H         PUBLIC        IAP_TRIG
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          EEPROMCLOSE
+  C:02C1H         LINE#         6
+  C:02C1H         LINE#         7
+  C:02C4H         LINE#         8
+  C:02C6H         LINE#         9
+  C:02C8H         LINE#         10
+  C:02CBH         LINE#         11
+  C:02CDH         LINE#         12
+  -------         ENDPROC       EEPROMCLOSE
+  -------         PROC          _EEPROMREADBYTE
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/03/2017  14:30:18  PAGE 3
+
+
+  D:0006H         SYMBOL        addr
+  -------         DO            
+  D:0007H         SYMBOL        dat
+  -------         ENDDO         
+  C:0257H         LINE#         17
+  C:0257H         LINE#         20
+  C:025AH         LINE#         21
+  C:025DH         LINE#         22
+  C:025FH         LINE#         23
+  C:0261H         LINE#         24
+  C:0264H         LINE#         25
+  C:0267H         LINE#         26
+  C:0268H         LINE#         27
+  C:026AH         LINE#         28
+  C:026DH         LINE#         29
+  C:026DH         LINE#         30
+  -------         ENDPROC       _EEPROMREADBYTE
+  -------         PROC          _EEPROMWRITEBYTE
+  D:0006H         SYMBOL        addr
+  D:0005H         SYMBOL        dat
+  C:026EH         LINE#         35
+  C:026EH         LINE#         36
+  C:0271H         LINE#         37
+  C:0274H         LINE#         38
+  C:0276H         LINE#         39
+  C:0278H         LINE#         40
+  C:027AH         LINE#         41
+  C:027DH         LINE#         42
+  C:0280H         LINE#         43
+  C:0281H         LINE#         44
+  -------         ENDPROC       _EEPROMWRITEBYTE
+  -------         PROC          _EEPROMERASESECTOR
+  D:0006H         SYMBOL        addr
+  C:029AH         LINE#         50
+  C:029AH         LINE#         51
+  C:029DH         LINE#         52
+  C:02A0H         LINE#         53
+  C:02A2H         LINE#         54
+  C:02A4H         LINE#         55
+  C:02A7H         LINE#         56
+  C:02AAH         LINE#         57
+  C:02ABH         LINE#         58
+  -------         ENDPROC       _EEPROMERASESECTOR
+  -------         ENDMOD        EEPROM
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00C0H         PUBLIC        P4
+  D:00C8H         PUBLIC        P5
+  D:00E8H         PUBLIC        P6
+  D:00F8H         PUBLIC        P7
+  C:02D7H         PUBLIC        _SendData
+  D:00A8H         PUBLIC        IE
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/03/2017  14:30:18  PAGE 4
+
+
+  D:00B8H         PUBLIC        IP
+  B:0098H.1       PUBLIC        TI
+  D:00D8H         PUBLIC        CCON
+  C:00F9H         PUBLIC        main
+  C:0242H         PUBLIC        _DelayXms
+  D:0099H         PUBLIC        SBUF
+  D:0098H         PUBLIC        SCON
+  C:02AEH         PUBLIC        UartInit
+  D:0088H         PUBLIC        TCON
+  D:008EH         PUBLIC        AUXR
+  C:0284H         SYMBOL        _?ix1000
+  C:028FH         SYMBOL        _?ix1001
+  D:001FH         PUBLIC        sector1
+  D:0021H         PUBLIC        sector2
+  D:00D6H         PUBLIC        T2H
+  D:00D7H         PUBLIC        T2L
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          MAIN
+  -------         DO            
+  D:0008H         SYMBOL        i
+  D:0009H         SYMBOL        mw
+  D:0014H         SYMBOL        mw2
+  -------         ENDDO         
+  C:00F9H         LINE#         11
+  C:00F9H         LINE#         13
+  C:010CH         LINE#         14
+  C:011FH         LINE#         16
+  C:0122H         LINE#         17
+  C:0125H         LINE#         18
+  C:0128H         LINE#         19
+  C:012FH         LINE#         20
+  C:0132H         LINE#         23
+  C:0135H         LINE#         24
+  C:0143H         LINE#         25
+  C:014CH         LINE#         27
+  C:0153H         LINE#         28
+  C:0156H         LINE#         30
+  C:0159H         LINE#         31
+  C:016BH         LINE#         32
+  C:0174H         LINE#         33
+  C:0177H         LINE#         35
+  C:0177H         LINE#         36
+  C:017AH         LINE#         37
+  C:0184H         LINE#         38
+  C:018DH         LINE#         39
+  C:0190H         LINE#         40
+  C:019EH         LINE#         41
+  C:01A7H         LINE#         42
+  C:01AAH         LINE#         43
+  C:01ADH         LINE#         44
+  C:01B0H         LINE#         45
+  -------         ENDPROC       MAIN
+  -------         PROC          UARTINIT
+  C:02AEH         LINE#         48
+  C:02AEH         LINE#         49
+  C:02AEH         LINE#         50
+  C:02B1H         LINE#         51
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/03/2017  14:30:18  PAGE 5
+
+
+  C:02B4H         LINE#         52
+  C:02B7H         LINE#         53
+  C:02BAH         LINE#         54
+  C:02BDH         LINE#         55
+  C:02C0H         LINE#         56
+  -------         ENDPROC       UARTINIT
+  -------         PROC          _SENDDATA
+  D:0007H         SYMBOL        data_buf
+  C:02D7H         LINE#         58
+  C:02D7H         LINE#         59
+  C:02D7H         LINE#         60
+  C:02D9H         LINE#         61
+  C:02DCH         LINE#         62
+  C:02DEH         LINE#         63
+  -------         ENDPROC       _SENDDATA
+  C:023EH         SYMBOL        L?0030
+  -------         PROC          L?0029
+  -------         ENDPROC       L?0029
+  C:023EH         SYMBOL        L?0030
+  -------         PROC          _DELAYXMS
+  D:0006H         SYMBOL        x
+  -------         DO            
+  D:0005H         SYMBOL        i
+  D:0004H         SYMBOL        j
+  -------         ENDDO         
+  C:0242H         LINE#         65
+  C:0242H         LINE#         67
+  C:024CH         LINE#         68
+  C:024EH         LINE#         69
+  C:0250H         LINE#         71
+  C:0250H         LINE#         72
+  C:0252H         LINE#         73
+  C:0254H         LINE#         74
+  C:0256H         LINE#         75
+  -------         ENDPROC       _DELAYXMS
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        ?C?COPY
+  C:00D3H         PUBLIC        ?C?COPY
+  -------         ENDMOD        ?C?COPY
+
+Program Size: data=36.0 xdata=0 code=735
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

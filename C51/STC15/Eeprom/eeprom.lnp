@@ -1,0 +1,4 @@
+"eeprom.obj",
+"main.obj" 
+TO "eeprom" 
+RAMSIZE(256) 
