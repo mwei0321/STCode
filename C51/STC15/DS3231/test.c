@@ -1,11 +1,11 @@
 #include "init.h"
 
-sbit DS3231_SDA = P0^5;
-sbit DS3231_SCL = P0^6;
+sbit DS3231_SDA = P3^3;
+sbit DS3231_SCL = P3^2;
 
 //DS3231设备地址
 unsigned char code RTC_addresss[9] = {0x00,0x01,0x02,0x04,0x05,0x03,0x06,0x11,0x12};
-unsigned timedata[9];
+unsigned timedata[9] = {0x00,0x00,0x01,0x03,0x31,0x10,0x18,0x00,0x00};
 
 void UartInit();
 void SendData(u8 data_buf);
@@ -38,7 +38,7 @@ void Timer0Init(void)		//1毫秒@12.000MHz
 	TH0 = 0xD1;		//设置定时初值
 	TF0 = 0;		//清除TF0标志
 	TR0 = 1;		//定时器0开始计时
-    ET0 = 1;
+  ET0 = 1;
 }
 
 //uart初始化
@@ -210,15 +210,20 @@ void Read_RTC(void){
 void Set_RTC(void){
     unsigned char i;
     for(i = 0; i < 7; i++){
-        timedata[i] = HEXToBCD(timedata[i]);
+//        timedata[i] = HEXToBCD(timedata[i]);
         DS3231_Write_Single_Byte(RTC_addresss[i],timedata[i]);
     }
     DS3231_Write_Single_Byte(0x0E,0x0C);
 }
 
+void sethour(){
+	DS3231_Write_Single_Byte(RTC_addresss[1],0x59);
+}
+
 
 void main(){
-    u8 str[] = "STC12MaWei";
+		u8 h = 0x00;
+		u8 i = 0;
     u8 dat = 0x00;
     
     EA = 1; 
@@ -229,7 +234,10 @@ void main(){
     
     Delay300ms();
     Delay300ms();
+		Set_RTC();
     Delay300ms();
+		Delay300ms();
+		P5M0 = 0x04;
 
     while(1){
         Read_RTC();
@@ -237,9 +245,19 @@ void main(){
         //dat = DS3231_Read_Single_Byte(0x00);
 
         SendData(dat);
+			  dat = timedata[1];
+				SendData(dat);
+			  dat = timedata[2];
+				SendData(dat);
        
         Delay300ms();
         Delay300ms();
         Delay300ms();
+			
+				if(timedata[2] >= 0x01 & timedata[2] <= 0x07 ){
+					 P54 = 1;
+				}else{
+					 P54 = 0;
+				}
     }
 }

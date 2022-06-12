@@ -1,0 +1,1055 @@
+C51 COMPILER V9.59.0.0   PCA                                                               06/05/2022 11:01:31 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE PCA
+OBJECT MODULE PLACED IN .\build\Release\lib\stc15_lib\src\PCA.o
+COMPILER INVOKED BY: D:\PhPython\Keil5\C51\BIN\C51.exe .\LIB\STC15_LIB\SRC\PCA.C PRINT(.\build\Release\lib\stc15_lib\src
+                    -\PCA.lst) OMF2 TABS(4) CODE NOCOND SYMBOLS OPTIMIZE(8,SPEED) SMALL ROM(LARGE) INCDIR(D:\PhPython\Keil5\C51\INC;.\src;.\l
+                    -ib\stc15_lib;.\lib\stc15_lib\src;.\lib\stc15_lib\include) DEFINE(DEBUG,__UVISION_VERSION=526) OBJECT(.\build\Release\lib
+                    -\stc15_lib\src\PCA.o)
+
+line level    source
+
+   1          
+   2          #include    "PCA.h"
+   3          
+   4          bit     B_Capture0,B_Capture1,B_Capture2;
+   5          u8      PCA0_mode,PCA1_mode,PCA2_mode;
+   6          u16     CCAP0_tmp,PCA_Timer0;
+   7          u16     CCAP1_tmp,PCA_Timer1;
+   8          u16     CCAP2_tmp,PCA_Timer2;
+   9          
+  10          /*************  功能说明    **************
+  11          
+  12          
+  13          ******************************************/
+  14          
+  15          u16 PWM0_low;   //PWM输出低电平的PCA时钟脉冲个数, 用户层不可见。
+  16          u16 PWM1_low;   //PWM输出低电平的PCA时钟脉冲个数, 用户层不可见。
+  17          u16 PWM2_low;   //PWM输出低电平的PCA时钟脉冲个数, 用户层不可见。
+  18          
+  19          
+  20          //========================================================================
+  21          // 函数: void PWMn_SetHighReg(unsigned int high)
+  22          // 描述: 更新占空比数据。
+  23          // 参数: high:  占空比数据，即PWM输出高电平的PCA时钟脉冲个数。
+  24          // 返回: 无
+  25          // 版本: VER1.0
+  26          // 日期: 2013-5-15
+  27          // 备注: 
+  28          //========================================================================
+  29          void PWMn_Update(u8 PCA_id, u16 high)
+  30          {
+  31   1          if(PCA_id == PCA0)
+  32   1          {
+  33   2              if(high > PWM0_HIGH_MAX)    high = PWM0_HIGH_MAX;   //如果写入大于最大占空比数据，强制为最大占空比。
+  34   2              if(high < PWM0_HIGH_MIN)    high = PWM0_HIGH_MIN;   //如果写入小于最小占空比数据，则返回错误代码2。
+  35   2              CR = 0;                         //停止PCA。
+  36   2              PCA_Timer0 = high;              //数据在正确范围，则装入占空比寄存器。
+  37   2              PWM0_low = PWM0_DUTY - high;    //计算并保存PWM输出低电平的PCA时钟脉冲个数。
+  38   2              CR = 1;                         //启动PCA。
+  39   2          }
+  40   1          else if(PCA_id == PCA1)
+  41   1          {
+  42   2              if(high > PWM1_HIGH_MAX)    high = PWM1_HIGH_MAX;   //如果写入大于最大占空比数据，强制为最大占空比。
+  43   2              if(high < PWM1_HIGH_MIN)    high = PWM1_HIGH_MIN;   //如果写入小于最小占空比数据，则返回错误代码2。
+  44   2              CR = 0;                         //停止PCA。
+  45   2              PCA_Timer1 = high;              //数据在正确范围，则装入占空比寄存器。
+  46   2              PWM1_low = PWM1_DUTY - high;    //计算并保存PWM输出低电平的PCA时钟脉冲个数。
+  47   2              CR = 1;                         //启动PCA。
+  48   2          }
+  49   1          else if(PCA_id == PCA2)
+  50   1          {
+  51   2              if(high > PWM2_HIGH_MAX)        high = PWM2_HIGH_MAX;   //如果写入大于最大占空比数据，强制为最大占空比。
+  52   2              if(high < PWM2_HIGH_MIN)        high = PWM2_HIGH_MIN;   //如果写入小于最小占空比数据，则返回错误代码2。
+C51 COMPILER V9.59.0.0   PCA                                                               06/05/2022 11:01:31 PAGE 2   
+
+  53   2              CR = 0;                     //停止PCA。
+  54   2              PCA_Timer2 = high;                      //数据在正确范围，则装入占空比寄存器。
+  55   2              PWM2_low = PWM2_DUTY - high;                //计算并保存PWM输出低电平的PCA时钟脉冲个数。
+  56   2              CR = 1;                     //启动PCA。
+  57   2          }
+  58   1      }
+  59          
+  60          
+  61          
+  62          //========================================================================
+  63          // 函数: UpdatePwm(u8 PCA_id, u8 pwm_value)
+  64          // 描述: 更新PWM值. 
+  65          // 参数: PCA_id: PCA序号. 取值 PCA0,PCA1,PCA2,PCA_Counter
+  66          //       pwm_value: pwm值, 这个值是输出低电平的时间.
+  67          // 返回: none.
+  68          // 版本: V1.0, 2012-11-22
+  69          //========================================================================
+  70          /*
+  71          void    UpdatePwm(u8 PCA_id, u8 pwm_value)
+  72          {
+  73              if(PCA_id == PCA0)      CCAP0H = pwm_value;
+  74              else if(PCA_id == PCA1) CCAP1H = pwm_value;
+  75              else if(PCA_id == PCA2) CCAP2H = pwm_value;
+  76          }
+  77          */
+  78          
+  79          //========================================================================
+  80          // 函数: void   PCA_Init(PCA_id, PCA_InitTypeDef *PCAx)
+  81          // 描述: PCA初始化程序.
+  82          // 参数: PCA_id: PCA序号. 取值 PCA0,PCA1,PCA2,PCA_Counter
+  83          //       PCAx: 结构参数,请参考PCA.h里的定义.
+  84          // 返回: none.
+  85          // 版本: V1.0, 2012-11-22
+  86          //========================================================================
+  87          void    PCA_Init(u8 PCA_id, PCA_InitTypeDef *PCAx)
+  88          {
+  89   1          if(PCA_id > PCA_Counter)    return;     //id错误
+  90   1      
+  91   1          if(PCA_id == PCA_Counter)           //设置公用Counter
+  92   1          {
+  93   2              CR = 0;
+  94   2              CH = 0;
+  95   2              CL = 0;
+  96   2              AUXR1 = (AUXR1 & ~(3<<4)) | PCAx->PCA_IoUse;            //切换IO口
+  97   2              CMOD  = (CMOD  & ~(7<<1)) | PCAx->PCA_Clock;            //选择时钟源
+  98   2              CMOD  = (CMOD  & ~1) | (PCAx->PCA_Interrupt_Mode & 1);  //ECF
+  99   2              if(PCAx->PCA_Polity == PolityHigh)      PPCA = 1;   //高优先级中断
+ 100   2              else                                    PPCA = 0;   //低优先级中断
+ 101   2              CR = 1;
+ 102   2              return;
+ 103   2          }
+ 104   1      
+ 105   1          PCAx->PCA_Interrupt_Mode &= (3<<4) + 1;
+ 106   1          if(PCAx->PCA_Mode >= PCA_Mode_SoftTimer)    PCAx->PCA_Interrupt_Mode &= ~(3<<4);
+ 107   1      
+ 108   1          if(PCA_id == PCA0)
+ 109   1          {
+ 110   2              CCAPM0    = PCAx->PCA_Mode | PCAx->PCA_Interrupt_Mode;  //工作模式, 中断模式
+ 111   2              PCA_PWM0  = (PCA_PWM0 & ~(3<<6)) | PCAx->PCA_PWM_Wide;  //PWM宽度
+ 112   2      
+ 113   2              PCA_Timer0 = PCAx->PCA_Value;
+ 114   2              B_Capture0 = 0;
+C51 COMPILER V9.59.0.0   PCA                                                               06/05/2022 11:01:31 PAGE 3   
+
+ 115   2              PCA0_mode = PCAx->PCA_Mode;
+ 116   2              CCAP0_tmp = PCA_Timer0;
+ 117   2              CCAP0L = (u8)CCAP0_tmp;         //将影射寄存器写入捕获寄存器，先写CCAP0L
+ 118   2              CCAP0H = (u8)(CCAP0_tmp >> 8);  //后写CCAP0H
+ 119   2          }
+ 120   1          if(PCA_id == PCA1)
+ 121   1          {
+ 122   2              CCAPM1    = PCAx->PCA_Mode | PCAx->PCA_Interrupt_Mode;
+ 123   2              PCA_PWM1  = (PCA_PWM1 & ~(3<<6)) | PCAx->PCA_PWM_Wide;
+ 124   2      
+ 125   2              PCA_Timer1 = PCAx->PCA_Value;
+ 126   2              B_Capture1 = 0;
+ 127   2              PCA1_mode = PCAx->PCA_Mode;
+ 128   2              CCAP1_tmp = PCA_Timer1;
+ 129   2              CCAP1L = (u8)CCAP1_tmp;         //将影射寄存器写入捕获寄存器，先写CCAP0L
+ 130   2              CCAP1H = (u8)(CCAP1_tmp >> 8);  //后写CCAP0H
+ 131   2          }
+ 132   1          if(PCA_id == PCA2)
+ 133   1          {
+ 134   2              CCAPM2    = PCAx->PCA_Mode | PCAx->PCA_Interrupt_Mode;
+ 135   2              PCA_PWM2  = (PCA_PWM2 & ~(3<<6)) | PCAx->PCA_PWM_Wide;
+ 136   2      
+ 137   2              PCA_Timer2 = PCAx->PCA_Value;
+ 138   2              B_Capture2 = 0;
+ 139   2              PCA2_mode = PCAx->PCA_Mode;
+ 140   2              CCAP2_tmp = PCA_Timer2;
+ 141   2              CCAP2L = (u8)CCAP2_tmp;         //将影射寄存器写入捕获寄存器，先写CCAP0L
+ 142   2              CCAP2H = (u8)(CCAP2_tmp >> 8);  //后写CCAP0H
+ 143   2          }
+ 144   1      }
+ 145          
+ 146          
+ 147          //========================================================================
+ 148          // 函数: void   PCA_Handler (void) interrupt PCA_VECTOR
+ 149          // 描述: PCA中断处理程序.
+ 150          // 参数: None
+ 151          // 返回: none.
+ 152          // 版本: V1.0, 2012-11-22
+ 153          //========================================================================
+ 154          void    PCA_Handler (void) interrupt PCA_VECTOR
+ 155          {
+ 156   1          if(CCF0)        //PCA模块0中断
+ 157   1          {
+ 158   2              CCF0 = 0;       //清PCA模块0中断标志
+ 159   2              if(P25) CCAP0_tmp += PCA_Timer0;    //输出为高电平，则给影射寄存器装载高电平时间长度
+ 160   2              else    CCAP0_tmp += PWM0_low;  //输出为低电平，则给影射寄存器装载低电平时间长度
+ 161   2              CCAP0L = (u8)CCAP0_tmp;         //将影射寄存器写入捕获寄存器，先写CCAP0L
+ 162   2              CCAP0H = (u8)(CCAP0_tmp >> 8);  //后写CCAP0H
+ 163   2          }
+ 164   1      
+ 165   1          if(CCF1)    //PCA模块1中断
+ 166   1          {
+ 167   2              CCF1 = 0;       //清PCA模块1中断标志
+ 168   2              if(P26) CCAP1_tmp += PCA_Timer1;    //输出为高电平，则给影射寄存器装载高电平时间长度
+ 169   2              else    CCAP1_tmp += PWM1_low;  //输出为低电平，则给影射寄存器装载低电平时间长度
+ 170   2              CCAP1L = (u8)CCAP1_tmp;         //将影射寄存器写入捕获寄存器，先写CCAP0L
+ 171   2              CCAP1H = (u8)(CCAP1_tmp >> 8);  //后写CCAP0H
+ 172   2          }
+ 173   1      
+ 174   1          if(CCF2)    //PCA模块2中断
+ 175   1          {
+ 176   2              CCF2 = 0;       //清PCA模块1中断标志
+C51 COMPILER V9.59.0.0   PCA                                                               06/05/2022 11:01:31 PAGE 4   
+
+ 177   2              if(P27) CCAP2_tmp += PCA_Timer2;    //输出为高电平，则给影射寄存器装载高电平时间长度
+ 178   2              else    CCAP2_tmp += PWM2_low;  //输出为低电平，则给影射寄存器装载低电平时间长度
+ 179   2              CCAP2L = (u8)CCAP2_tmp;         //将影射寄存器写入捕获寄存器，先写CCAP0L
+ 180   2              CCAP2H = (u8)(CCAP2_tmp >> 8);  //后写CCAP0H
+ 181   2          }
+ 182   1      
+ 183   1      /*  if(CF)  //PCA溢出中断
+ 184   1          {
+ 185   1              CF = 0;         //清PCA溢出中断标志
+ 186   1          }
+ 187   1      */
+ 188   1      }
+C51 COMPILER V9.59.0.0   PCA                                                               06/05/2022 11:01:31 PAGE 5   
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+
+             ; FUNCTION _PWMn_Update (BEGIN)
+                                           ; SOURCE LINE # 29
+;---- Variable 'high' assigned to Register 'R4/R5' ----
+;---- Variable 'PCA_id' assigned to Register 'R7' ----
+                                           ; SOURCE LINE # 30
+                                           ; SOURCE LINE # 31
+0000 EF                MOV     A,R7
+0001 FB                MOV     R3,A
+0002 7A00              MOV     R2,#00H
+0004 702E              JNZ     ?C0001
+                                           ; SOURCE LINE # 32
+                                           ; SOURCE LINE # 33
+0006 D3                SETB    C
+0007 ED                MOV     A,R5
+0008 9450              SUBB    A,#050H
+000A EC                MOV     A,R4
+000B 940F              SUBB    A,#0FH
+000D 4004              JC      ?C0002
+000F 7C0F              MOV     R4,#0FH
+0011 7D50              MOV     R5,#050H
+0013         ?C0002:
+                                           ; SOURCE LINE # 34
+0013 C3                CLR     C
+0014 ED                MOV     A,R5
+0015 9450              SUBB    A,#050H
+0017 EC                MOV     A,R4
+0018 9400              SUBB    A,#00H
+001A 5004              JNC     ?C0003
+001C 7C00              MOV     R4,#00H
+001E 7D50              MOV     R5,#050H
+0020         ?C0003:
+                                           ; SOURCE LINE # 35
+0020 C2DE              CLR     CR
+                                           ; SOURCE LINE # 36
+0022 8C00        R     MOV     PCA_Timer0,R4
+0024 8D00        R     MOV     PCA_Timer0+01H,R5
+                                           ; SOURCE LINE # 37
+0026 C3                CLR     C
+0027 74A0              MOV     A,#0A0H
+0029 9D                SUBB    A,R5
+002A F500        R     MOV     PWM0_low+01H,A
+002C 740F              MOV     A,#0FH
+002E 9C                SUBB    A,R4
+002F F500        R     MOV     PWM0_low,A
+                                           ; SOURCE LINE # 38
+0031 D2DE              SETB    CR
+                                           ; SOURCE LINE # 39
+0033 22                RET     
+0034         ?C0001:
+                                           ; SOURCE LINE # 40
+0034 EB                MOV     A,R3
+0035 6401              XRL     A,#01H
+0037 4A                ORL     A,R2
+0038 702E              JNZ     ?C0005
+                                           ; SOURCE LINE # 41
+                                           ; SOURCE LINE # 42
+003A D3                SETB    C
+003B ED                MOV     A,R5
+003C 9468              SUBB    A,#068H
+C51 COMPILER V9.59.0.0   PCA                                                               06/05/2022 11:01:31 PAGE 6   
+
+003E EC                MOV     A,R4
+003F 940B              SUBB    A,#0BH
+0041 4004              JC      ?C0006
+0043 7C0B              MOV     R4,#0BH
+0045 7D68              MOV     R5,#068H
+0047         ?C0006:
+                                           ; SOURCE LINE # 43
+0047 C3                CLR     C
+0048 ED                MOV     A,R5
+0049 9450              SUBB    A,#050H
+004B EC                MOV     A,R4
+004C 9400              SUBB    A,#00H
+004E 5004              JNC     ?C0007
+0050 7C00              MOV     R4,#00H
+0052 7D50              MOV     R5,#050H
+0054         ?C0007:
+                                           ; SOURCE LINE # 44
+0054 C2DE              CLR     CR
+                                           ; SOURCE LINE # 45
+0056 8C00        R     MOV     PCA_Timer1,R4
+0058 8D00        R     MOV     PCA_Timer1+01H,R5
+                                           ; SOURCE LINE # 46
+005A C3                CLR     C
+005B 74B8              MOV     A,#0B8H
+005D 9D                SUBB    A,R5
+005E F500        R     MOV     PWM1_low+01H,A
+0060 740B              MOV     A,#0BH
+0062 9C                SUBB    A,R4
+0063 F500        R     MOV     PWM1_low,A
+                                           ; SOURCE LINE # 47
+0065 D2DE              SETB    CR
+                                           ; SOURCE LINE # 48
+0067 22                RET     
+0068         ?C0005:
+                                           ; SOURCE LINE # 49
+0068 EB                MOV     A,R3
+0069 6402              XRL     A,#02H
+006B 4A                ORL     A,R2
+006C 702D              JNZ     ?C0012
+                                           ; SOURCE LINE # 50
+                                           ; SOURCE LINE # 51
+006E D3                SETB    C
+006F ED                MOV     A,R5
+0070 9480              SUBB    A,#080H
+0072 EC                MOV     A,R4
+0073 9407              SUBB    A,#07H
+0075 4004              JC      ?C0010
+0077 7C07              MOV     R4,#07H
+0079 7D80              MOV     R5,#080H
+007B         ?C0010:
+                                           ; SOURCE LINE # 52
+007B C3                CLR     C
+007C ED                MOV     A,R5
+007D 9450              SUBB    A,#050H
+007F EC                MOV     A,R4
+0080 9400              SUBB    A,#00H
+0082 5004              JNC     ?C0011
+0084 7C00              MOV     R4,#00H
+0086 7D50              MOV     R5,#050H
+0088         ?C0011:
+                                           ; SOURCE LINE # 53
+0088 C2DE              CLR     CR
+C51 COMPILER V9.59.0.0   PCA                                                               06/05/2022 11:01:31 PAGE 7   
+
+                                           ; SOURCE LINE # 54
+008A 8C00        R     MOV     PCA_Timer2,R4
+008C 8D00        R     MOV     PCA_Timer2+01H,R5
+                                           ; SOURCE LINE # 55
+008E C3                CLR     C
+008F 74D0              MOV     A,#0D0H
+0091 9D                SUBB    A,R5
+0092 F500        R     MOV     PWM2_low+01H,A
+0094 7407              MOV     A,#07H
+0096 9C                SUBB    A,R4
+0097 F500        R     MOV     PWM2_low,A
+                                           ; SOURCE LINE # 56
+0099 D2DE              SETB    CR
+                                           ; SOURCE LINE # 57
+                                           ; SOURCE LINE # 58
+009B         ?C0012:
+009B 22                RET     
+             ; FUNCTION _PWMn_Update (END)
+
+             ; FUNCTION _PCA_Init (BEGIN)
+                                           ; SOURCE LINE # 87
+0000 8B00        R     MOV     PCAx,R3
+0002 8A00        R     MOV     PCAx+01H,R2
+0004 8900        R     MOV     PCAx+02H,R1
+;---- Variable 'PCA_id' assigned to Register 'R5' ----
+0006 AD07              MOV     R5,AR7
+                                           ; SOURCE LINE # 88
+                                           ; SOURCE LINE # 89
+0008 ED                MOV     A,R5
+0009 D3                SETB    C
+000A 9403              SUBB    A,#03H
+000C 7480              MOV     A,#080H
+000E 9480              SUBB    A,#080H
+0010 4003              JC      $ + 5H
+0012 020000      R     LJMP    ?C0014
+                                           ; SOURCE LINE # 91
+0015 EF                MOV     A,R7
+0016 6403              XRL     A,#03H
+0018 7048              JNZ     ?C0015
+                                           ; SOURCE LINE # 92
+                                           ; SOURCE LINE # 93
+001A C2DE              CLR     CR
+                                           ; SOURCE LINE # 94
+001C F5F9              MOV     CH,A
+                                           ; SOURCE LINE # 95
+001E F5E9              MOV     CL,A
+                                           ; SOURCE LINE # 96
+0020 AB00        R     MOV     R3,PCAx
+0022 AA00        R     MOV     R2,PCAx+01H
+0024 A900        R     MOV     R1,PCAx+02H
+0026 120000      E     LCALL   ?C?CLDPTR
+0029 FF                MOV     R7,A
+002A E5A2              MOV     A,AUXR1
+002C 54CF              ANL     A,#0CFH
+002E 4F                ORL     A,R7
+002F F5A2              MOV     AUXR1,A
+                                           ; SOURCE LINE # 97
+0031 900001            MOV     DPTR,#01H
+0034 120000      E     LCALL   ?C?CLDOPTR
+0037 FF                MOV     R7,A
+0038 E5D9              MOV     A,CMOD
+003A 54F1              ANL     A,#0F1H
+C51 COMPILER V9.59.0.0   PCA                                                               06/05/2022 11:01:31 PAGE 8   
+
+003C 4F                ORL     A,R7
+003D F5D9              MOV     CMOD,A
+                                           ; SOURCE LINE # 98
+003F 900004            MOV     DPTR,#04H
+0042 120000      E     LCALL   ?C?CLDOPTR
+0045 5401              ANL     A,#01H
+0047 FF                MOV     R7,A
+0048 E5D9              MOV     A,CMOD
+004A 54FE              ANL     A,#0FEH
+004C 4F                ORL     A,R7
+004D F5D9              MOV     CMOD,A
+                                           ; SOURCE LINE # 99
+004F 900005            MOV     DPTR,#05H
+0052 120000      E     LCALL   ?C?CLDOPTR
+0055 6401              XRL     A,#01H
+0057 7004              JNZ     ?C0016
+0059 D2BF              SETB    PPCA
+005B 8002              SJMP    ?C0017
+005D         ?C0016:
+                                           ; SOURCE LINE # 100
+005D C2BF              CLR     PPCA
+005F         ?C0017:
+                                           ; SOURCE LINE # 101
+005F D2DE              SETB    CR
+0061 22                RET     
+                                           ; SOURCE LINE # 103
+0062         ?C0015:
+                                           ; SOURCE LINE # 105
+0062 AB00        R     MOV     R3,PCAx
+0064 E500        R     MOV     A,PCAx+02H
+0066 2404              ADD     A,#04H
+0068 F9                MOV     R1,A
+0069 E4                CLR     A
+006A 3500        R     ADDC    A,PCAx+01H
+006C FA                MOV     R2,A
+006D 120000      E     LCALL   ?C?CLDPTR
+0070 5431              ANL     A,#031H
+0072 120000      E     LCALL   ?C?CSTPTR
+                                           ; SOURCE LINE # 106
+0075 AB00        R     MOV     R3,PCAx
+0077 AA00        R     MOV     R2,PCAx+01H
+0079 A900        R     MOV     R1,PCAx+02H
+007B 900002            MOV     DPTR,#02H
+007E 120000      E     LCALL   ?C?CLDOPTR
+0081 C3                CLR     C
+0082 9448              SUBB    A,#048H
+0084 7480              MOV     A,#080H
+0086 9480              SUBB    A,#080H
+0088 400F              JC      ?C0018
+008A E9                MOV     A,R1
+008B 2404              ADD     A,#04H
+008D F9                MOV     R1,A
+008E E4                CLR     A
+008F 3A                ADDC    A,R2
+0090 FA                MOV     R2,A
+0091 120000      E     LCALL   ?C?CLDPTR
+0094 54CF              ANL     A,#0CFH
+0096 120000      E     LCALL   ?C?CSTPTR
+0099         ?C0018:
+                                           ; SOURCE LINE # 108
+0099 ED                MOV     A,R5
+009A 7040              JNZ     ?C0019
+C51 COMPILER V9.59.0.0   PCA                                                               06/05/2022 11:01:31 PAGE 9   
+
+                                           ; SOURCE LINE # 109
+                                           ; SOURCE LINE # 110
+009C AB00        R     MOV     R3,PCAx
+009E AA00        R     MOV     R2,PCAx+01H
+00A0 A900        R     MOV     R1,PCAx+02H
+00A2 900004            MOV     DPTR,#04H
+00A5 120000      E     LCALL   ?C?CLDOPTR
+00A8 FF                MOV     R7,A
+00A9 900002            MOV     DPTR,#02H
+00AC 120000      E     LCALL   ?C?CLDOPTR
+00AF FE                MOV     R6,A
+00B0 4F                ORL     A,R7
+00B1 F5DA              MOV     CCAPM0,A
+                                           ; SOURCE LINE # 111
+00B3 900003            MOV     DPTR,#03H
+00B6 120000      E     LCALL   ?C?CLDOPTR
+00B9 FF                MOV     R7,A
+00BA E5F2              MOV     A,PCA_PWM0
+00BC 543F              ANL     A,#03FH
+00BE 4F                ORL     A,R7
+00BF F5F2              MOV     PCA_PWM0,A
+                                           ; SOURCE LINE # 113
+00C1 900006            MOV     DPTR,#06H
+00C4 120000      E     LCALL   ?C?ILDOPTR
+00C7 F500        R     MOV     PCA_Timer0+01H,A
+00C9 85F000      R     MOV     PCA_Timer0,B
+                                           ; SOURCE LINE # 114
+00CC C200        R     CLR     B_Capture0
+                                           ; SOURCE LINE # 115
+00CE 8E00        R     MOV     PCA0_mode,R6
+                                           ; SOURCE LINE # 116
+00D0 850000      R     MOV     CCAP0_tmp,PCA_Timer0
+00D3 F500        R     MOV     CCAP0_tmp+01H,A
+                                           ; SOURCE LINE # 117
+00D5 8500EA      R     MOV     CCAP0L,CCAP0_tmp+01H
+                                           ; SOURCE LINE # 118
+00D8 E500        R     MOV     A,CCAP0_tmp
+00DA F5FA              MOV     CCAP0H,A
+                                           ; SOURCE LINE # 119
+00DC         ?C0019:
+                                           ; SOURCE LINE # 120
+00DC ED                MOV     A,R5
+00DD 6401              XRL     A,#01H
+00DF 7040              JNZ     ?C0020
+                                           ; SOURCE LINE # 121
+                                           ; SOURCE LINE # 122
+00E1 AB00        R     MOV     R3,PCAx
+00E3 AA00        R     MOV     R2,PCAx+01H
+00E5 A900        R     MOV     R1,PCAx+02H
+00E7 900004            MOV     DPTR,#04H
+00EA 120000      E     LCALL   ?C?CLDOPTR
+00ED FF                MOV     R7,A
+00EE 900002            MOV     DPTR,#02H
+00F1 120000      E     LCALL   ?C?CLDOPTR
+00F4 FE                MOV     R6,A
+00F5 4F                ORL     A,R7
+00F6 F5DB              MOV     CCAPM1,A
+                                           ; SOURCE LINE # 123
+00F8 900003            MOV     DPTR,#03H
+00FB 120000      E     LCALL   ?C?CLDOPTR
+00FE FF                MOV     R7,A
+00FF E5F3              MOV     A,PCA_PWM1
+C51 COMPILER V9.59.0.0   PCA                                                               06/05/2022 11:01:31 PAGE 10  
+
+0101 543F              ANL     A,#03FH
+0103 4F                ORL     A,R7
+0104 F5F3              MOV     PCA_PWM1,A
+                                           ; SOURCE LINE # 125
+0106 900006            MOV     DPTR,#06H
+0109 120000      E     LCALL   ?C?ILDOPTR
+010C F500        R     MOV     PCA_Timer1+01H,A
+010E 85F000      R     MOV     PCA_Timer1,B
+                                           ; SOURCE LINE # 126
+0111 C200        R     CLR     B_Capture1
+                                           ; SOURCE LINE # 127
+0113 8E00        R     MOV     PCA1_mode,R6
+                                           ; SOURCE LINE # 128
+0115 850000      R     MOV     CCAP1_tmp,PCA_Timer1
+0118 F500        R     MOV     CCAP1_tmp+01H,A
+                                           ; SOURCE LINE # 129
+011A 8500EB      R     MOV     CCAP1L,CCAP1_tmp+01H
+                                           ; SOURCE LINE # 130
+011D E500        R     MOV     A,CCAP1_tmp
+011F F5FB              MOV     CCAP1H,A
+                                           ; SOURCE LINE # 131
+0121         ?C0020:
+                                           ; SOURCE LINE # 132
+0121 ED                MOV     A,R5
+0122 6402              XRL     A,#02H
+0124 7040              JNZ     ?C0014
+                                           ; SOURCE LINE # 133
+                                           ; SOURCE LINE # 134
+0126 AB00        R     MOV     R3,PCAx
+0128 AA00        R     MOV     R2,PCAx+01H
+012A A900        R     MOV     R1,PCAx+02H
+012C 900004            MOV     DPTR,#04H
+012F 120000      E     LCALL   ?C?CLDOPTR
+0132 FF                MOV     R7,A
+0133 900002            MOV     DPTR,#02H
+0136 120000      E     LCALL   ?C?CLDOPTR
+0139 FE                MOV     R6,A
+013A 4F                ORL     A,R7
+013B F5DC              MOV     CCAPM2,A
+                                           ; SOURCE LINE # 135
+013D 900003            MOV     DPTR,#03H
+0140 120000      E     LCALL   ?C?CLDOPTR
+0143 FF                MOV     R7,A
+0144 E5F4              MOV     A,PCA_PWM2
+0146 543F              ANL     A,#03FH
+0148 4F                ORL     A,R7
+0149 F5F4              MOV     PCA_PWM2,A
+                                           ; SOURCE LINE # 137
+014B 900006            MOV     DPTR,#06H
+014E 120000      E     LCALL   ?C?ILDOPTR
+0151 F500        R     MOV     PCA_Timer2+01H,A
+0153 85F000      R     MOV     PCA_Timer2,B
+                                           ; SOURCE LINE # 138
+0156 C200        R     CLR     B_Capture2
+                                           ; SOURCE LINE # 139
+0158 8E00        R     MOV     PCA2_mode,R6
+                                           ; SOURCE LINE # 140
+015A 850000      R     MOV     CCAP2_tmp,PCA_Timer2
+015D F500        R     MOV     CCAP2_tmp+01H,A
+                                           ; SOURCE LINE # 141
+015F 8500EC      R     MOV     CCAP2L,CCAP2_tmp+01H
+                                           ; SOURCE LINE # 142
+C51 COMPILER V9.59.0.0   PCA                                                               06/05/2022 11:01:31 PAGE 11  
+
+0162 E500        R     MOV     A,CCAP2_tmp
+0164 F5FC              MOV     CCAP2H,A
+                                           ; SOURCE LINE # 143
+                                           ; SOURCE LINE # 144
+0166         ?C0014:
+0166 22                RET     
+             ; FUNCTION _PCA_Init (END)
+
+             ; FUNCTION PCA_Handler (BEGIN)
+0000 C0E0              PUSH    ACC
+0002 C0D0              PUSH    PSW
+                                           ; SOURCE LINE # 154
+                                           ; SOURCE LINE # 156
+0004 30D822            JNB     CCF0,?C0022
+                                           ; SOURCE LINE # 157
+                                           ; SOURCE LINE # 158
+0007 C2D8              CLR     CCF0
+                                           ; SOURCE LINE # 159
+0009 30A50A            JNB     P25,?C0023
+000C E500        R     MOV     A,PCA_Timer0+01H
+000E 2500        R     ADD     A,CCAP0_tmp+01H
+0010 F500        R     MOV     CCAP0_tmp+01H,A
+0012 E500        R     MOV     A,PCA_Timer0
+0014 8008              SJMP    ?C0032
+0016         ?C0023:
+                                           ; SOURCE LINE # 160
+0016 E500        R     MOV     A,PWM0_low+01H
+0018 2500        R     ADD     A,CCAP0_tmp+01H
+001A F500        R     MOV     CCAP0_tmp+01H,A
+001C E500        R     MOV     A,PWM0_low
+001E         ?C0032:
+001E 3500        R     ADDC    A,CCAP0_tmp
+0020 F500        R     MOV     CCAP0_tmp,A
+0022         ?C0024:
+                                           ; SOURCE LINE # 161
+0022 8500EA      R     MOV     CCAP0L,CCAP0_tmp+01H
+                                           ; SOURCE LINE # 162
+0025 E500        R     MOV     A,CCAP0_tmp
+0027 F5FA              MOV     CCAP0H,A
+                                           ; SOURCE LINE # 163
+0029         ?C0022:
+                                           ; SOURCE LINE # 165
+0029 30D922            JNB     CCF1,?C0025
+                                           ; SOURCE LINE # 166
+                                           ; SOURCE LINE # 167
+002C C2D9              CLR     CCF1
+                                           ; SOURCE LINE # 168
+002E 30A60A            JNB     P26,?C0026
+0031 E500        R     MOV     A,PCA_Timer1+01H
+0033 2500        R     ADD     A,CCAP1_tmp+01H
+0035 F500        R     MOV     CCAP1_tmp+01H,A
+0037 E500        R     MOV     A,PCA_Timer1
+0039 8008              SJMP    ?C0033
+003B         ?C0026:
+                                           ; SOURCE LINE # 169
+003B E500        R     MOV     A,PWM1_low+01H
+003D 2500        R     ADD     A,CCAP1_tmp+01H
+003F F500        R     MOV     CCAP1_tmp+01H,A
+0041 E500        R     MOV     A,PWM1_low
+0043         ?C0033:
+0043 3500        R     ADDC    A,CCAP1_tmp
+0045 F500        R     MOV     CCAP1_tmp,A
+C51 COMPILER V9.59.0.0   PCA                                                               06/05/2022 11:01:31 PAGE 12  
+
+0047         ?C0027:
+                                           ; SOURCE LINE # 170
+0047 8500EB      R     MOV     CCAP1L,CCAP1_tmp+01H
+                                           ; SOURCE LINE # 171
+004A E500        R     MOV     A,CCAP1_tmp
+004C F5FB              MOV     CCAP1H,A
+                                           ; SOURCE LINE # 172
+004E         ?C0025:
+                                           ; SOURCE LINE # 174
+004E 30DA22            JNB     CCF2,?C0031
+                                           ; SOURCE LINE # 175
+                                           ; SOURCE LINE # 176
+0051 C2DA              CLR     CCF2
+                                           ; SOURCE LINE # 177
+0053 30A70A            JNB     P27,?C0029
+0056 E500        R     MOV     A,PCA_Timer2+01H
+0058 2500        R     ADD     A,CCAP2_tmp+01H
+005A F500        R     MOV     CCAP2_tmp+01H,A
+005C E500        R     MOV     A,PCA_Timer2
+005E 8008              SJMP    ?C0034
+0060         ?C0029:
+                                           ; SOURCE LINE # 178
+0060 E500        R     MOV     A,PWM2_low+01H
+0062 2500        R     ADD     A,CCAP2_tmp+01H
+0064 F500        R     MOV     CCAP2_tmp+01H,A
+0066 E500        R     MOV     A,PWM2_low
+0068         ?C0034:
+0068 3500        R     ADDC    A,CCAP2_tmp
+006A F500        R     MOV     CCAP2_tmp,A
+006C         ?C0030:
+                                           ; SOURCE LINE # 179
+006C 8500EC      R     MOV     CCAP2L,CCAP2_tmp+01H
+                                           ; SOURCE LINE # 180
+006F E500        R     MOV     A,CCAP2_tmp
+0071 F5FC              MOV     CCAP2H,A
+                                           ; SOURCE LINE # 181
+                                           ; SOURCE LINE # 188
+0073         ?C0031:
+0073 D0D0              POP     PSW
+0075 D0E0              POP     ACC
+0077 32                RETI    
+             ; FUNCTION PCA_Handler (END)
+
+C51 COMPILER V9.59.0.0   PCA                                                               06/05/2022 11:01:31 PAGE 13  
+
+NAME                                    CLASS   MSPACE  TYPE    OFFSET  SIZE
+====                                    =====   ======  ====    ======  ====
+
+
+CCF2 . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00DAH  1
+ACC7 . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00E7H  1
+P0M1 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0093H  1
+P1M0 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0092H  1
+uint16_t . . . . . . . . . . . . . . .  TYPEDEF  -----  U_INT    -----  2
+P2M0 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0096H  1
+P1M1 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0091H  1
+P0 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0080H  1
+P3M0 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00B2H  1
+P2M1 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0095H  1
+P1 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0090H  1
+PCA_InitTypeDef. . . . . . . . . . . .  TYPEDEF  -----  STRUCT   -----  8
+  PCA_IoUse. . . . . . . . . . . . . .  MEMBER   -----  U_CHAR   0000H  1
+  PCA_Clock. . . . . . . . . . . . . .  MEMBER   -----  U_CHAR   0001H  1
+  PCA_Mode . . . . . . . . . . . . . .  MEMBER   -----  U_CHAR   0002H  1
+  PCA_PWM_Wide . . . . . . . . . . . .  MEMBER   -----  U_CHAR   0003H  1
+  PCA_Interrupt_Mode . . . . . . . . .  MEMBER   -----  U_CHAR   0004H  1
+  PCA_Polity . . . . . . . . . . . . .  MEMBER   -----  U_CHAR   0005H  1
+  PCA_Value. . . . . . . . . . . . . .  MEMBER   -----  U_INT    0006H  2
+P4M0 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00B4H  1
+P3M1 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00B1H  1
+P2 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00A0H  1
+P5M0 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00CAH  1
+P4M1 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00B3H  1
+P3 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00B0H  1
+WKTCH. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00ABH  1
+T0 . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B4H  1
+AC . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D6H  1
+P6M0 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00CCH  1
+P5M1 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C9H  1
+P4 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C0H  1
+CLKOUT0. . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B5H  1
+T1 . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B5H  1
+P7M0 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00E2H  1
+P6M1 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00CBH  1
+P5 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C8H  1
+ISP_TRIG . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C6H  1
+EA . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00AFH  1
+CLKOUT1. . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B4H  1
+SPI_SS_2 . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A4H  1
+P6 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00E8H  1
+P7M1 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00E1H  1
+SPI_SS_3 . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00CCH  1
+SPI_MISO . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0094H  1
+SPI_MOSI . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0093H  1
+CCP0 . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0091H  1
+P7 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00F8H  1
+WKTCL. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00AAH  1
+int32_t. . . . . . . . . . . . . . . .  TYPEDEF  -----  LONG     -----  4
+CCP1 . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0090H  1
+SPCTL. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00CEH  1
+CF . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00DFH  1
+CCP2 . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B7H  1
+int16_t. . . . . . . . . . . . . . . .  TYPEDEF  -----  INT      -----  2
+CH . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00F9H  1
+P_SW1. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00A2H  1
+PCA0_mode. . . . . . . . . . . . . . .  PUBLIC   DATA   U_CHAR   0000H  1
+C51 COMPILER V9.59.0.0   PCA                                                               06/05/2022 11:01:31 PAGE 14  
+
+NAME                                    CLASS   MSPACE  TYPE    OFFSET  SIZE
+====                                    =====   ======  ====    ======  ====
+
+
+P_SW2. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00BAH  1
+PCA1_mode. . . . . . . . . . . . . . .  PUBLIC   DATA   U_CHAR   0001H  1
+EADC . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00ADH  1
+SPI_SCLK_2 . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A1H  1
+IE . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00A8H  1
+PCA2_mode. . . . . . . . . . . . . . .  PUBLIC   DATA   U_CHAR   0002H  1
+SPI_SCLK_3 . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00C3H  1
+CL . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00E9H  1
+IAP_CMD. . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C5H  1
+CCAP0H . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00FAH  1
+CCAP1H . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00FBH  1
+size_t . . . . . . . . . . . . . . . .  TYPEDEF  -----  U_INT    -----  2
+CCAP2H . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00FCH  1
+ADC_RES. . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00BDH  1
+IPH2 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00B6H  1
+CR . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00DEH  1
+CCAP0L . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00EAH  1
+RD . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B7H  1
+CCAP1L . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00EBH  1
+CCAPM0 . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00DAH  1
+CCAP2L . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00ECH  1
+CCAPM1 . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00DBH  1
+ES . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00ACH  1
+CCAPM2 . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00DCH  1
+PADC . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00BDH  1
+SPI_MISO_2 . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A2H  1
+SPI_MOSI_2 . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A3H  1
+IP . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00B8H  1
+SPI_MISO_3 . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00C1H  1
+SPI_MOSI_3 . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00C0H  1
+RI . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0098H  1
+INT0 . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B2H  1
+CY . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D7H  1
+TI . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0099H  1
+INT1 . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B3H  1
+CLK_DIV. . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0097H  1
+IAP_ADDRH. . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C3H  1
+RXD2 . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0090H  1
+ISP_CMD. . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C5H  1
+PS . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00BCH  1
+TXD2 . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0091H  1
+SP . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0081H  1
+CMOD . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D9H  1
+CCON . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D8H  1
+IAP_ADDRL. . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C4H  1
+PPCA . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00BFH  1
+OV . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D2H  1
+WR . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B6H  1
+_PWMn_Update . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  PCA_id . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0007H  1
+  high . . . . . . . . . . . . . . . .  * REG *  DATA   U_INT    0004H  2
+B_Capture0 . . . . . . . . . . . . . .  PUBLIC   DATA   BIT      0000H  1
+B_Capture1 . . . . . . . . . . . . . .  PUBLIC   DATA   BIT      0001H  1
+ELVD . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00AEH  1
+B_Capture2 . . . . . . . . . . . . . .  PUBLIC   DATA   BIT      0002H  1
+u8 . . . . . . . . . . . . . . . . . .  TYPEDEF  -----  U_CHAR   -----  1
+P00. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0080H  1
+C51 COMPILER V9.59.0.0   PCA                                                               06/05/2022 11:01:31 PAGE 15  
+
+NAME                                    CLASS   MSPACE  TYPE    OFFSET  SIZE
+====                                    =====   ======  ====    ======  ====
+
+
+P10. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0090H  1
+P01. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0081H  1
+ADC_CONTR. . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00BCH  1
+SBUF . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0099H  1
+PCON . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0087H  1
+P20. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A0H  1
+P11. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0091H  1
+P02. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0082H  1
+ISP_ADDRH. . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C3H  1
+P30. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B0H  1
+P21. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A1H  1
+P12. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0092H  1
+P03. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0083H  1
+P40. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00C0H  1
+P31. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B1H  1
+P22. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A2H  1
+P13. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0093H  1
+P04. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0084H  1
+SCON . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0098H  1
+WAKE_CLKO. . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   008FH  1
+P50. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00C8H  1
+P41. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00C1H  1
+P32. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B2H  1
+P23. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A3H  1
+P14. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0094H  1
+P05. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0085H  1
+TMOD . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0089H  1
+TCON . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0088H  1
+P51. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00C9H  1
+P42. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00C2H  1
+P33. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B3H  1
+P24. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A4H  1
+P15. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0095H  1
+P06. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0086H  1
+ISP_ADDRL. . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C4H  1
+PLVD . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00BEH  1
+P52. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00CAH  1
+P43. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00C3H  1
+P34. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B4H  1
+P25. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A5H  1
+P16. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0096H  1
+P07. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0087H  1
+P53. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00CBH  1
+P44. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00C4H  1
+P35. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B5H  1
+P26. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A6H  1
+P17. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0097H  1
+P54. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00CCH  1
+P45. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00C5H  1
+P36. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B6H  1
+P27. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A7H  1
+P55. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00CDH  1
+P46. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00C6H  1
+P37. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B7H  1
+P56. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00CEH  1
+P47. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00C7H  1
+P57. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00CFH  1
+C51 COMPILER V9.59.0.0   PCA                                                               06/05/2022 11:01:31 PAGE 16  
+
+NAME                                    CLASS   MSPACE  TYPE    OFFSET  SIZE
+====                                    =====   ======  ====    ======  ====
+
+
+IE0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0089H  1
+BUS_SPEED. . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00A1H  1
+IE1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      008BH  1
+IE2. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00AFH  1
+B. . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00F0H  1
+AUXR . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   008EH  1
+IAP_CONTR. . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C7H  1
+ACC. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00E0H  1
+ptrdiff_t. . . . . . . . . . . . . . .  TYPEDEF  -----  LONG     -----  4
+ET0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A9H  1
+ET1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00ABH  1
+TF0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      008DH  1
+_PCA_Init. . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  PCA_id . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0005H  1
+  PCAx . . . . . . . . . . . . . . . .  AUTO     DATA   PTR      0000H  3
+TF1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      008FH  1
+IP2. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00B5H  1
+RL_TH0 . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   008CH  1
+RB8. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      009AH  1
+RL_TH1 . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   008DH  1
+TH0. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   008CH  1
+EX0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A8H  1
+IT0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0088H  1
+RL_T2H . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D6H  1
+TH1. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   008DH  1
+EX1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00AAH  1
+TB8. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      009BH  1
+IT1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      008AH  1
+RL_T3H . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D4H  1
+TH2. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D6H  1
+T2H. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D6H  1
+P. . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D0H  1
+RL_T4H . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D2H  1
+TH3. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D4H  1
+T3H. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D4H  1
+RL_TL0 . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   008AH  1
+uint8_t. . . . . . . . . . . . . . . .  TYPEDEF  -----  U_CHAR   -----  1
+SM0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      009FH  1
+TH4. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D2H  1
+T4H. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D2H  1
+RL_TL1 . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   008BH  1
+TL0. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   008AH  1
+SM1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      009EH  1
+RL_T2L . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D7H  1
+TL1. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   008BH  1
+SM2. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      009DH  1
+RL_T3L . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D5H  1
+TL2. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D7H  1
+T2L. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D7H  1
+RL_T4L . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D3H  1
+TL3. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D5H  1
+T3L. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D5H  1
+PT0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B9H  1
+TL4. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D3H  1
+T4L. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D3H  1
+PT1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00BBH  1
+RS0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D3H  1
+C51 COMPILER V9.59.0.0   PCA                                                               06/05/2022 11:01:31 PAGE 17  
+
+NAME                                    CLASS   MSPACE  TYPE    OFFSET  SIZE
+====                                    =====   ======  ====    ======  ====
+
+
+ISP_CONTR. . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C7H  1
+TR0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      008CH  1
+RS1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D4H  1
+IAP_DATA . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C2H  1
+TR1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      008EH  1
+PX0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B8H  1
+WDT_CONTR. . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C1H  1
+PWM0_low . . . . . . . . . . . . . . .  PUBLIC   DATA   U_INT    0003H  2
+PX1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00BAH  1
+int8_t . . . . . . . . . . . . . . . .  TYPEDEF  -----  CHAR     -----  1
+PWM1_low . . . . . . . . . . . . . . .  PUBLIC   DATA   U_INT    0005H  2
+u32. . . . . . . . . . . . . . . . . .  TYPEDEF  -----  U_LONG   -----  4
+PCA_PWM0 . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00F2H  1
+PWM2_low . . . . . . . . . . . . . . .  PUBLIC   DATA   U_INT    0007H  2
+PCA_PWM1 . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00F3H  1
+u16. . . . . . . . . . . . . . . . . .  TYPEDEF  -----  U_INT    -----  2
+PCA_PWM2 . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00F4H  1
+P1ASF. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   009DH  1
+DPH. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0083H  1
+T4T3M. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D1H  1
+ADC_RESL . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00BEH  1
+DPL. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0082H  1
+SPSTAT . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00CDH  1
+IPH. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00B7H  1
+S2BUF. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   009BH  1
+PCON2. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0097H  1
+S3BUF. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00ADH  1
+REN. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      009CH  1
+S4BUF. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0085H  1
+S2CON. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   009AH  1
+S3CON. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00ACH  1
+ISP_DATA . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C2H  1
+S4CON. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0084H  1
+PCA_Timer0 . . . . . . . . . . . . . .  PUBLIC   DATA   U_INT    0009H  2
+PCA_Timer1 . . . . . . . . . . . . . .  PUBLIC   DATA   U_INT    000BH  2
+PCA_Timer2 . . . . . . . . . . . . . .  PUBLIC   DATA   U_INT    000DH  2
+SADEN. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00B9H  1
+wchar_t. . . . . . . . . . . . . . . .  TYPEDEF  -----  CHAR     -----  1
+RXD. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B0H  1
+SADDR. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00A9H  1
+TXD. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B1H  1
+B0 . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00F0H  1
+B1 . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00F1H  1
+IAP_TRIG . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C6H  1
+AUXR1. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00A2H  1
+B2 . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00F2H  1
+SPI_SS . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0092H  1
+AUXR2. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   008FH  1
+B3 . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00F3H  1
+B4 . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00F4H  1
+F0 . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D5H  1
+B5 . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00F5H  1
+F1 . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D1H  1
+INT_CLKO . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   008FH  1
+PCA_Handler. . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+B6 . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00F6H  1
+ACC0 . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00E0H  1
+C51 COMPILER V9.59.0.0   PCA                                                               06/05/2022 11:01:31 PAGE 18  
+
+NAME                                    CLASS   MSPACE  TYPE    OFFSET  SIZE
+====                                    =====   ======  ====    ======  ====
+
+
+B7 . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00F7H  1
+ACC1 . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00E1H  1
+ACC2 . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00E2H  1
+ACC3 . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00E3H  1
+PSW. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D0H  1
+CCAP0_tmp. . . . . . . . . . . . . . .  PUBLIC   DATA   U_INT    000FH  2
+ACC4 . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00E4H  1
+SPI_SCLK . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0095H  1
+CCAP1_tmp. . . . . . . . . . . . . . .  PUBLIC   DATA   U_INT    0011H  2
+CCF0 . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D8H  1
+ACC5 . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00E5H  1
+uint32_t . . . . . . . . . . . . . . .  TYPEDEF  -----  U_LONG   -----  4
+CCAP2_tmp. . . . . . . . . . . . . . .  PUBLIC   DATA   U_INT    0013H  2
+CCF1 . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D9H  1
+ACC6 . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00E6H  1
+SPDAT. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00CFH  1
+P0M0 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0094H  1
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    638    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     21       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      3    ----
+   EDATA SIZE       =   ----    ----
+   HDATA SIZE       =   ----    ----
+   XDATA CONST SIZE =   ----    ----
+   FAR CONST SIZE   =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

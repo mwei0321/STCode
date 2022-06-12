@@ -1,0 +1,418 @@
+[2022-04-10 15:49:32]	[done]
+	build successfully !
+
+[2022-04-10 15:51:12]	[done]
+	build successfully !
+
+[2022-04-10 16:08:24]	compilation failed at : "f:\STCode\C51\VScode\Temp\src\tm1620.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <5ad0758a213a4017a4a43a71c811e836>:0 
+---
+C51 COMPILER V9.59.0.0 - SN: K1DZC-FBQX3C
+COPYRIGHT Copyright (C) 2012 - 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C202 IN LINE 5 OF .\SRC\tm1620.h: 'P3': undefined identifier
+*** ERROR C202 IN LINE 6 OF .\SRC\tm1620.h: 'P3': undefined identifier
+*** ERROR C202 IN LINE 7 OF .\SRC\tm1620.h: 'P3': undefined identifier
+*** ERROR C141 IN LINE 14 OF .\SRC\tm1620.h: syntax error near 'addr', expected ')'
+*** ERROR C129 IN LINE 21 OF .\SRC\tm1620.h: missing ';' before 'xdata'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  5 ERROR(S)
+
+[2022-04-10 16:09:53]	compilation failed at : "f:\STCode\C51\VScode\Temp\src\tm1620.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <5ad0758a213a4017a4a43a71c811e836>:0 
+---
+C51 COMPILER V9.59.0.0 - SN: K1DZC-FBQX3C
+COPYRIGHT Copyright (C) 2012 - 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** WARNING C206 IN LINE 125 OF .\SRC\TM1620.C: 'delay_ms': missing function-prototype
+*** ERROR C267 IN LINE 125 OF .\SRC\TM1620.C: 'delay_ms': requires ANSI-style prototype
+C51 COMPILATION COMPLETE.  1 WARNING(S),  1 ERROR(S)
+
+[2022-04-10 16:11:12]	compilation failed at : "f:\STCode\C51\VScode\Temp\src\tm1620.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <5ad0758a213a4017a4a43a71c811e836>:0 
+---
+C51 COMPILER V9.59.0.0 - SN: K1DZC-FBQX3C
+COPYRIGHT Copyright (C) 2012 - 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C202 IN LINE 29 OF .\SRC\TM1620.C: 'TM1620_STB': undefined identifier
+*** ERROR C202 IN LINE 33 OF .\SRC\TM1620.C: 'TM1620_DIN': undefined identifier
+*** ERROR C202 IN LINE 35 OF .\SRC\TM1620.C: 'TM1620_CLK': undefined identifier
+*** ERROR C202 IN LINE 37 OF .\SRC\TM1620.C: 'TM1620_CLK': undefined identifier
+*** ERROR C202 IN LINE 56 OF .\SRC\TM1620.C: 'TM1620_STB': undefined identifier
+C51 COMPILATION COMPLETE.  0 WARNING(S),  5 ERROR(S)
+
+[2022-04-10 16:11:45]	[done]
+	build successfully !
+
+[2022-04-10 16:13:12]	[done]
+	build successfully !
+
+[2022-04-10 16:19:29]	[done]
+	build successfully !
+
+[2022-04-10 16:20:17]	[done]
+	build successfully !
+
+[2022-04-10 16:21:51]	[done]
+	build successfully !
+
+[2022-04-10 18:18:04]	[done]
+	build successfully !
+
+[2022-04-10 18:21:40]	[done]
+	build successfully !
+
+[2022-04-10 18:25:38]	[done]
+	build successfully !
+
+[2022-04-10 18:26:44]	[done]
+	build successfully !
+
+[2022-04-10 18:26:51]	[done]
+	build successfully !
+
+[2022-04-10 19:40:46]	compilation failed at : "f:\STCode\C51\VScode\Temp\src\tm1620.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <5ad0758a213a4017a4a43a71c811e836>:0 
+---
+C51 COMPILER V9.59.0.0 - SN: K1DZC-FBQX3C
+COPYRIGHT Copyright (C) 2012 - 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C141 IN LINE 145 OF .\SRC\TM1620.C: syntax error near 'uint8_t', expected 'sizeof'
+*** ERROR C202 IN LINE 145 OF .\SRC\TM1620.C: 'i': undefined identifier
+*** ERROR C202 IN LINE 145 OF .\SRC\TM1620.C: 'i': undefined identifier
+*** ERROR C202 IN LINE 145 OF .\SRC\TM1620.C: 'i': undefined identifier
+*** ERROR C141 IN LINE 145 OF .\SRC\TM1620.C: syntax error near ')', expected ';'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  5 ERROR(S)
+
+[2022-04-10 19:42:12]	compilation failed at : "f:\STCode\C51\VScode\Temp\src\tm1620.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <5ad0758a213a4017a4a43a71c811e836>:0 
+---
+C51 COMPILER V9.59.0.0 - SN: K1DZC-FBQX3C
+COPYRIGHT Copyright (C) 2012 - 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C141 IN LINE 144 OF .\SRC\TM1620.C: syntax error near 'uint8_t', expected 'sizeof'
+*** ERROR C202 IN LINE 144 OF .\SRC\TM1620.C: 'i': undefined identifier
+*** ERROR C202 IN LINE 144 OF .\SRC\TM1620.C: 'i': undefined identifier
+*** ERROR C202 IN LINE 144 OF .\SRC\TM1620.C: 'i': undefined identifier
+*** ERROR C141 IN LINE 144 OF .\SRC\TM1620.C: syntax error near ')', expected ';'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  5 ERROR(S)
+
+[2022-04-10 19:42:59]	[done]
+	build successfully !
+
+[2022-04-10 19:43:33]	[done]
+	build successfully !
+
+[2022-04-10 19:48:59]	[done]
+	build successfully !
+
+[2022-04-10 19:49:03]	[done]
+	build successfully !
+
+[2022-04-10 19:49:15]	[done]
+	build successfully !
+
+[2022-04-10 19:50:29]	[done]
+	build successfully !
+
+[2022-04-10 19:51:58]	[done]
+	build successfully !
+
+[2022-04-10 19:53:52]	[done]
+	build successfully !
+
+[2022-04-10 19:53:55]	[done]
+	build successfully !
+
+[2022-04-10 19:55:29]	[done]
+	build successfully !
+
+[2022-04-10 19:56:06]	[done]
+	build successfully !
+
+[2022-04-10 19:57:45]	[done]
+	build successfully !
+
+[2022-04-10 19:58:57]	[done]
+	build successfully !
+
+[2022-04-10 20:00:01]	[done]
+	build successfully !
+
+[2022-04-10 20:00:33]	[done]
+	build successfully !
+
+[2022-04-10 20:02:53]	[done]
+	build successfully !
+
+[2022-04-10 20:03:43]	[done]
+	build successfully !
+
+[2022-04-10 20:04:43]	[done]
+	build successfully !
+
+[2022-04-10 20:08:58]	[done]
+	build successfully !
+
+[2022-04-10 20:09:07]	[done]
+	build successfully !
+
+[2022-04-10 20:10:04]	[done]
+	build successfully !
+
+[2022-04-10 20:11:44]	[done]
+	build successfully !
+
+[2022-04-10 20:12:41]	[done]
+	build successfully !
+
+[2022-04-10 20:13:30]	[done]
+	build successfully !
+
+[2022-04-10 20:13:57]	[done]
+	build successfully !
+
+[2022-04-10 20:15:27]	[done]
+	build successfully !
+
+[2022-04-10 20:15:43]	[done]
+	build successfully !
+
+[2022-04-10 20:17:21]	[done]
+	build successfully !
+
+[2022-04-10 20:17:59]	[done]
+	build successfully !
+
+[2022-04-10 20:18:05]	[done]
+	build successfully !
+
+[2022-04-10 20:18:31]	[done]
+	build successfully !
+
+[2022-04-10 20:26:46]	[done]
+	build successfully !
+
+[2022-04-10 20:27:01]	[done]
+	build successfully !
+
+[2022-04-10 20:28:25]	[done]
+	build successfully !
+
+[2022-04-10 20:29:44]	[done]
+	build successfully !
+
+[2022-04-10 20:39:29]	[done]
+	build successfully !
+
+[2022-04-10 20:40:51]	[done]
+	build successfully !
+
+[2022-04-10 20:41:18]	[done]
+	build successfully !
+
+[2022-04-10 20:41:38]	[done]
+	build successfully !
+
+[2022-04-10 20:42:09]	[done]
+	build successfully !
+
+[2022-04-10 20:43:23]	[done]
+	build successfully !
+
+[2022-04-10 20:46:09]	[done]
+	build successfully !
+
+[2022-04-10 20:46:31]	[done]
+	build successfully !
+
+[2022-04-10 20:46:58]	[done]
+	build successfully !
+
+[2022-04-10 20:47:58]	[done]
+	build successfully !
+
+[2022-04-10 20:48:14]	[done]
+	build successfully !
+
+[2022-04-10 21:10:02]	[done]
+	build successfully !
+
+[2022-04-10 21:10:59]	[done]
+	build successfully !
+
+[2022-04-10 21:13:16]	[done]
+	build successfully !
+
+[2022-04-10 21:13:36]	[done]
+	build successfully !
+
+[2022-04-10 21:33:41]	compilation failed at : "f:\STCode\C51\VScode\Temp\src\ds18b20.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <5ad0758a213a4017a4a43a71c811e836>:0 
+---
+C51 COMPILER V9.59.0.0 - SN: K1DZC-FBQX3C
+COPYRIGHT Copyright (C) 2012 - 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C202 IN LINE 4 OF .\SRC\DS18B20.H: 'P3': undefined identifier
+*** ERROR C129 IN LINE 6 OF .\SRC\DS18B20.H: missing ';' before 'getTemp'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  2 ERROR(S)
+
+[2022-04-10 21:34:26]	[done]
+	build successfully !
+
+[2022-04-10 21:34:51]	[done]
+	build successfully !
+
+[2022-04-10 21:35:14]	[done]
+	build successfully !
+
+[2022-04-10 22:36:32]	compilation failed at : "f:\STCode\C51\VScode\Temp\src\ds18b20.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <5ad0758a213a4017a4a43a71c811e836>:0 
+---
+C51 COMPILER V9.59.0.0 - SN: K1DZC-FBQX3C
+COPYRIGHT Copyright (C) 2012 - 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C202 IN LINE 4 OF .\SRC\DS18B20.H: 'P3': undefined identifier
+*** ERROR C129 IN LINE 6 OF .\SRC\DS18B20.H: missing ';' before 'getTemp'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  2 ERROR(S)
+
+[2022-04-10 22:38:46]	compilation failed at : "f:\STCode\C51\VScode\Temp\src\ds18b20.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <5ad0758a213a4017a4a43a71c811e836>:0 
+---
+C51 COMPILER V9.59.0.0 - SN: K1DZC-FBQX3C
+COPYRIGHT Copyright (C) 2012 - 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** WARNING C206 IN LINE 17 OF .\SRC\DS18B20.C: 'dsdelay1xus': missing function-prototype
+*** ERROR C267 IN LINE 17 OF .\SRC\DS18B20.C: 'dsdelay1xus': requires ANSI-style prototype
+*** ERROR C141 IN LINE 34 OF .\SRC\DS18B20.C: syntax error near 'DS18B20_DQ', expected ';'
+C51 COMPILATION COMPLETE.  1 WARNING(S),  2 ERROR(S)
+
+[2022-04-10 22:39:09]	compilation failed at : "f:\STCode\C51\VScode\Temp\src\ds18b20.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <5ad0758a213a4017a4a43a71c811e836>:0 
+---
+C51 COMPILER V9.59.0.0 - SN: K1DZC-FBQX3C
+COPYRIGHT Copyright (C) 2012 - 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C141 IN LINE 34 OF .\SRC\DS18B20.C: syntax error near 'DS18B20_DQ', expected ';'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)
+
+[2022-04-10 22:46:50]	compilation failed at : "f:\STCode\C51\VScode\Temp\src\ds18b20.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <5ad0758a213a4017a4a43a71c811e836>:0 
+---
+C51 COMPILER V9.59.0.0 - SN: K1DZC-FBQX3C
+COPYRIGHT Copyright (C) 2012 - 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** WARNING C206 IN LINE 17 OF .\SRC\DS18B20.C: 'dsdelay1xus': missing function-prototype
+*** ERROR C267 IN LINE 17 OF .\SRC\DS18B20.C: 'dsdelay1xus': requires ANSI-style prototype
+*** ERROR C141 IN LINE 34 OF .\SRC\DS18B20.C: syntax error near 'DS18B20_DQ', expected ';'
+C51 COMPILATION COMPLETE.  1 WARNING(S),  2 ERROR(S)
+
+[2022-04-10 22:47:05]	compilation failed at : "f:\STCode\C51\VScode\Temp\src\ds18b20.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <5ad0758a213a4017a4a43a71c811e836>:0 
+---
+C51 COMPILER V9.59.0.0 - SN: K1DZC-FBQX3C
+COPYRIGHT Copyright (C) 2012 - 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C141 IN LINE 34 OF .\SRC\DS18B20.C: syntax error near 'DS18B20_DQ', expected ';'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)
+
+[2022-04-10 22:50:13]	compilation failed at : "f:\STCode\C51\VScode\Temp\src\ds18b20.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <5ad0758a213a4017a4a43a71c811e836>:0 
+---
+C51 COMPILER V9.59.0.0 - SN: K1DZC-FBQX3C
+COPYRIGHT Copyright (C) 2012 - 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C141 IN LINE 34 OF .\SRC\DS18B20.C: syntax error near 'DS18B20_DQ', expected ';'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)
+
+[2022-04-10 22:50:26]	compilation failed at : "f:\STCode\C51\VScode\Temp\src\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <5ad0758a213a4017a4a43a71c811e836>:0 
+---
+C51 COMPILER V9.59.0.0 - SN: K1DZC-FBQX3C
+COPYRIGHT Copyright (C) 2012 - 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** WARNING C206 IN LINE 24 OF .\SRC\MAIN.C: 'getTemp': missing function-prototype
+*** WARNING C206 IN LINE 33 OF .\SRC\MAIN.C: 'TM1620WriteCmd': missing function-prototype
+*** ERROR C267 IN LINE 33 OF .\SRC\MAIN.C: 'TM1620WriteCmd': requires ANSI-style prototype
+C51 COMPILATION COMPLETE.  2 WARNING(S),  1 ERROR(S)
+
+[2022-04-10 22:50:46]	compilation failed at : "f:\STCode\C51\VScode\Temp\src\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <5ad0758a213a4017a4a43a71c811e836>:0 
+---
+C51 COMPILER V9.59.0.0 - SN: K1DZC-FBQX3C
+COPYRIGHT Copyright (C) 2012 - 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** WARNING C206 IN LINE 34 OF .\SRC\MAIN.C: 'TM1620WriteCmd': missing function-prototype
+*** ERROR C267 IN LINE 34 OF .\SRC\MAIN.C: 'TM1620WriteCmd': requires ANSI-style prototype
+C51 COMPILATION COMPLETE.  1 WARNING(S),  1 ERROR(S)
+
+[2022-04-10 22:56:13]	[done]
+	build successfully !
+
+[2022-04-10 22:58:17]	[done]
+	build successfully !
+
+[2022-04-10 22:59:38]	[done]
+	build successfully !
+
+[2022-04-10 23:01:20]	compilation failed at : "f:\STCode\C51\VScode\Temp\src\tm1620.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <5ad0758a213a4017a4a43a71c811e836>:0 
+---
+C51 COMPILER V9.59.0.0 - SN: K1DZC-FBQX3C
+COPYRIGHT Copyright (C) 2012 - 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C141 IN LINE 159 OF .\SRC\TM1620.C: syntax error near '}', expected ';'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)
+
+[2022-04-10 23:01:32]	[done]
+	build successfully !
+
+[2022-04-10 23:03:17]	[done]
+	build successfully !
+
+[2022-04-10 23:03:48]	[done]
+	build successfully !
+
+[2022-04-10 23:04:38]	[done]
+	build successfully !
+
+[2022-04-10 23:05:22]	[done]
+	build successfully !
+
+[2022-04-10 23:05:53]	[done]
+	build successfully !
+
+[2022-04-10 23:08:25]	[done]
+	build successfully !
+
+[2022-04-10 23:13:49]	[done]
+	build successfully !
+
+[2022-04-10 23:15:00]	[done]
+	build successfully !
+
+[2022-04-10 23:18:00]	[done]
+	build successfully !
+
+[2022-04-16 10:42:54]	[done]
+	build successfully !
+
+[2022-04-16 16:24:29]	[done]
+	build successfully !
+
+[2022-04-16 19:11:18]	compilation failed at : "f:\STCode\C51\VScode\Temp\src\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <82200d7cd0cf4a279c5fb9fc299a656f>:0 
+---
+C51 COMPILER V9.59.0.0 - SN: K1DZC-FBQX3C
+COPYRIGHT Copyright (C) 2012 - 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C141 IN LINE 17 OF .\SRC\MAIN.C: syntax error near 'uint8_t', expected 'hdata'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)
+
+[2022-04-16 19:12:08]	[done]
+	build successfully !
+
+[2022-04-16 19:15:06]	[done]
+	build successfully !
+
+[2022-04-16 19:16:17]	[done]
+	build successfully !
+
+[2022-04-16 19:17:58]	[done]
+	build successfully !
+
+[2022-04-16 19:18:26]	[done]
+	build successfully !
+
+[2022-04-16 19:31:03]	[done]
+	build successfully !
+
+[2022-05-15 08:18:50]	[done]
+	build successfully !
+
+[2022-05-15 08:20:12]	[done]
+	build successfully !
+

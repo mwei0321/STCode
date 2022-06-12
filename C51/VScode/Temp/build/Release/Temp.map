@@ -1,0 +1,634 @@
+LX51 LINKER/LOCATER V4.66.93.0                                                          06/05/2022  11:01:31  PAGE 1
+
+
+LX51 LINKER/LOCATER V4.66.93.0, INVOKED BY:
+D:\PHPYTHON\KEIL5\C51\BIN\LX51.EXE .\BUILD\RELEASE\LIB\STC15_LIB\SRC\ADC.O, .\BUILD\RELEASE\LIB\STC15_LIB\SRC\EEPROM.O, 
+>> .\BUILD\RELEASE\LIB\STC15_LIB\SRC\EXTI.O, .\BUILD\RELEASE\LIB\STC15_LIB\SRC\GPIO.O, .\BUILD\RELEASE\LIB\STC15_LIB\SRC
+>> \PCA.O, .\BUILD\RELEASE\LIB\STC15_LIB\SRC\SOFT_UART.O, .\BUILD\RELEASE\LIB\STC15_LIB\SRC\USART.O, .\BUILD\RELEASE\LIB
+>> \STC15_LIB\SRC\DELAY.O, .\BUILD\RELEASE\LIB\STC15_LIB\SRC\TIMER.O, .\BUILD\RELEASE\SRC\DS18B20.O, .\BUILD\RELEASE\SRC
+>> \MAIN.O, .\BUILD\RELEASE\SRC\TM1620.O TO .\BUILD\RELEASE\TEMP PRINT (.\build\Release\Temp.map) REMOVEUNUSED
+
+
+CPU MODE:     8051 MODE
+MEMORY MODEL: SMALL WITH FLOATING POINT ARITHMETIC
+
+
+INPUT MODULES INCLUDED:
+  .\BUILD\RELEASE\LIB\STC15_LIB\SRC\ADC.O (ADC)
+         COMMENT TYPE 0: C51 V9.59.0.0
+  .\BUILD\RELEASE\LIB\STC15_LIB\SRC\EEPROM.O (EEPROM)
+         COMMENT TYPE 0: C51 V9.59.0.0
+  .\BUILD\RELEASE\LIB\STC15_LIB\SRC\EXTI.O (EXTI)
+         COMMENT TYPE 0: C51 V9.59.0.0
+  .\BUILD\RELEASE\LIB\STC15_LIB\SRC\GPIO.O (GPIO)
+         COMMENT TYPE 0: C51 V9.59.0.0
+  .\BUILD\RELEASE\LIB\STC15_LIB\SRC\PCA.O (PCA)
+         COMMENT TYPE 0: C51 V9.59.0.0
+  .\BUILD\RELEASE\LIB\STC15_LIB\SRC\SOFT_UART.O (SOFT_UART)
+         COMMENT TYPE 0: C51 V9.59.0.0
+  .\BUILD\RELEASE\LIB\STC15_LIB\SRC\USART.O (USART)
+         COMMENT TYPE 0: C51 V9.59.0.0
+  .\BUILD\RELEASE\LIB\STC15_LIB\SRC\DELAY.O (DELAY)
+         COMMENT TYPE 0: C51 V9.59.0.0
+  .\BUILD\RELEASE\LIB\STC15_LIB\SRC\TIMER.O (TIMER)
+         COMMENT TYPE 0: C51 V9.59.0.0
+  .\BUILD\RELEASE\SRC\DS18B20.O (DS18B20)
+         COMMENT TYPE 0: C51 V9.59.0.0
+  .\BUILD\RELEASE\SRC\MAIN.O (MAIN)
+         COMMENT TYPE 0: C51 V9.59.0.0
+  .\BUILD\RELEASE\SRC\TM1620.O (TM1620)
+         COMMENT TYPE 0: C51 V9.59.0.0
+  D:\PHPYTHON\KEIL5\C51\LIB\C51FPS.LIB (?C?FPADD)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\PHPYTHON\KEIL5\C51\LIB\C51FPS.LIB (?C?FPMUL)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\PHPYTHON\KEIL5\C51\LIB\C51FPS.LIB (?C?FCAST)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\PHPYTHON\KEIL5\C51\LIB\C51FPS.LIB (?C?CASTF)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\PHPYTHON\KEIL5\C51\LIB\C51FPS.LIB (VPRINTF)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\PHPYTHON\KEIL5\C51\LIB\C51FPS.LIB (?C?FPGETOPN)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\PHPYTHON\KEIL5\C51\LIB\C51FPS.LIB (PRINTF)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\PHPYTHON\KEIL5\C51\LIB\C51FPS.LIB (?C?FPROUND)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\PHPYTHON\KEIL5\C51\LIB\C51FPS.LIB (?C?FPCONVERT)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\PHPYTHON\KEIL5\C51\LIB\C51FPS.LIB (?C?FPDIV)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\PHPYTHON\KEIL5\C51\LIB\C51FPS.LIB (?C?FTNPWR)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\PHPYTHON\KEIL5\C51\LIB\C51S.LIB (?C_STARTUP)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\PHPYTHON\KEIL5\C51\LIB\C51S.LIB (?C?CLDPTR)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\PHPYTHON\KEIL5\C51\LIB\C51S.LIB (?C?CLDOPTR)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\PHPYTHON\KEIL5\C51\LIB\C51S.LIB (?C?CSTPTR)
+LX51 LINKER/LOCATER V4.66.93.0                                                        06/05/2022  11:01:31  PAGE 2
+
+
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\PHPYTHON\KEIL5\C51\LIB\C51S.LIB (?C?IMUL)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\PHPYTHON\KEIL5\C51\LIB\C51S.LIB (?C?UIDIV)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\PHPYTHON\KEIL5\C51\LIB\C51S.LIB (?C?ILDOPTR)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\PHPYTHON\KEIL5\C51\LIB\C51S.LIB (?C?ULDIV)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\PHPYTHON\KEIL5\C51\LIB\C51S.LIB (?C?LNEG)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\PHPYTHON\KEIL5\C51\LIB\C51S.LIB (?C?PLDIIDATA)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\PHPYTHON\KEIL5\C51\LIB\C51S.LIB (?C?CCASE)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\PHPYTHON\KEIL5\C51\LIB\C51S.LIB (?C?LIMUL)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\PHPYTHON\KEIL5\C51\LIB\C51S.LIB (?C_INIT)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+
+
+ACTIVE MEMORY CLASSES OF MODULE:  .\BUILD\RELEASE\TEMP (ADC)
+
+BASE        START       END         USED      MEMORY CLASS
+==========================================================
+C:000000H   C:000000H   C:00FFFFH   000AA2H   CODE
+I:000000H   I:000000H   I:00007FH   00002BH   DATA
+I:000020H.0 I:000020H.0 I:00002FH.7 000000H.4 BIT
+C:000000H   C:000000H   C:00FFFFH   000012H   CONST
+X:000000H   X:000000H   X:00FFFFH   00000CH   XDATA
+I:000000H   I:000000H   I:0000FFH   000001H   IDATA
+
+
+MEMORY MAP OF MODULE:  .\BUILD\RELEASE\TEMP (ADC)
+
+
+START     STOP      LENGTH    ALIGN  RELOC    MEMORY CLASS   SEGMENT NAME
+=========================================================================
+
+* * * * * * * * * * *   D A T A   M E M O R Y   * * * * * * * * * * * * *
+000000H   000007H   000008H   ---    AT..     DATA           "REG BANK 0"
+000008H   00001CH   000015H   BYTE   UNIT     DATA           ?DT?PCA
+00001DH.0 00001FH.7 000003H.0 ---    ---      **GAP**
+000020H.0 000020H.2 000000H.3 BIT    UNIT     BIT            ?BI?PCA
+000020H.3 000020H.3 000000H.1 BIT    UNIT     BIT            _BIT_GROUP_
+000020H.4 000020H   000000H.4 ---    ---      **GAP**
+000021H   000027H   000007H   BYTE   UNIT     DATA           ?DT?DELAY
+000028H   00002EH   000007H   BYTE   UNIT     DATA           _DATA_GROUP_
+00002FH   00002FH   000001H   BYTE   UNIT     IDATA          ?STACK
+
+* * * * * * * * * * *   C O D E   M E M O R Y   * * * * * * * * * * * * *
+000000H   000002H   000003H   ---    OFFS..   CODE           ?CO??C_STARTUP?0
+000003H   000036H   000034H   BYTE   UNIT     CODE           ?PR?_DS18B20WRITCMD?DS18B20
+000037H   00003AH   000004H   ---    ---      **GAP**
+00003BH   00003DH   000003H   BYTE   OFFS..   CODE           ?PCA?0003B
+00003EH   000772H   000735H   BYTE   UNIT     CODE           ?C?LIB_CODE
+000773H   000844H   0000D2H   BYTE   UNIT     CODE           ?PR?MAIN?MAIN
+000845H   0008D0H   00008CH   BYTE   UNIT     CODE           ?C_C51STARTUP
+0008D1H   000948H   000078H   BYTE   UNIT     CODE           ?PR?PCA_HANDLER?PCA
+000949H   00097AH   000032H   BYTE   UNIT     CODE           ?PR?DS18B20READ?DS18B20
+00097BH   0009A5H   00002BH   BYTE   UNIT     CODE           ?PR?_TM1620WRITEDATA?TM1620
+0009A6H   0009C3H   00001EH   BYTE   UNIT     CODE           ?PR?DS18B20INIT?DS18B20
+0009C4H   0009E0H   00001DH   BYTE   UNIT     CODE           ?PR?TM1620INIT?TM1620
+0009E1H   0009FCH   00001CH   BYTE   UNIT     CODE           ?PR?TM1620TEST?TM1620
+0009FDH   000A15H   000019H   BYTE   UNIT     CODE           ?PR?GETTEMP?DS18B20
+LX51 LINKER/LOCATER V4.66.93.0                                                        06/05/2022  11:01:31  PAGE 3
+
+
+000A16H   000A2CH   000017H   BYTE   UNIT     CODE           ?PR?_DSDELAY1XUS?DS18B20
+000A2DH   000A42H   000016H   BYTE   UNIT     CODE           ?PR?DS1B20CT?DS18B20
+000A43H   000A56H   000014H   BYTE   UNIT     CODE           ?PR?_TMDELAYUS?TM1620
+000A57H   000A6AH   000014H   BYTE   UNIT     CODE           ?PR?_TM1620SHOWBYADDR?TM1620
+000A6BH   000A7AH   000010H   BYTE   UNIT     CODE           ?PR?_DELAY_MS?DELAY
+000A7BH   000A8AH   000010H   BYTE   UNIT     CODE           ?C_INITSEG
+000A8BH   000A95H   00000BH   BYTE   UNIT     CODE           ?PR?DS1B20READCMD?DS18B20
+000A96H   000A9EH   000009H   BYTE   UNIT     CODE           ?PR?_TM1620WRITECMD?TM1620
+000A9FH   000AA5H   000007H   BYTE   UNIT     CODE           ?PR?TM1620END?TM1620
+000AA6H   000AB7H   000012H   BYTE   UNIT     CONST          ?CO?TM1620
+
+* * * * * * * * * * *  X D A T A   M E M O R Y  * * * * * * * * * * * * *
+000000H   00000BH   00000CH   BYTE   UNIT     XDATA          ?XD?TM1620
+
+* * * * * * * * *   R E M O V E D     S E G M E N T S   * * * * * * * *
+   *DEL*:           000057H   BYTE   UNIT     CODE           ?PR?_ADC_INILIZE?ADC
+   *DEL*:           00000DH   BYTE   UNIT     CODE           ?PR?_ADC_POWERCONTROL?ADC
+   *DEL*:           00006AH   BYTE   UNIT     CODE           ?PR?_GET_ADC10BITRESULT?ADC
+   *DEL*:           00000EH   BYTE   UNIT     CODE           ?PR?DISABLEEEPROM?EEPROM
+   *DEL*:           00003DH   BYTE   UNIT     CODE           ?PR?_EEPROM_READ_N?EEPROM
+   *DEL*:           000007H   BYTE   UNIT     DATA           ?DT?_EEPROM_READ_N?EEPROM
+   *DEL*:           00001FH   BYTE   UNIT     CODE           ?PR?_EEPROM_SECTORERASE?EEPROM
+   *DEL*:           00003DH   BYTE   UNIT     CODE           ?PR?_EEPROM_WRITE_N?EEPROM
+   *DEL*:           000007H   BYTE   UNIT     DATA           ?DT?_EEPROM_WRITE_N?EEPROM
+   *DEL*:           0000C6H   BYTE   UNIT     CODE           ?PR?_EXT_INILIZE?EXTI
+   *DEL*:           0001E1H   BYTE   UNIT     CODE           ?PR?_GPIO_INILIZE?GPIO
+   *DEL*:           00009CH   BYTE   UNIT     CODE           ?PR?_PWMN_UPDATE?PCA
+   *DEL*:           000167H   BYTE   UNIT     CODE           ?PR?_PCA_INIT?PCA
+   *DEL*:           000003H   BYTE   UNIT     DATA           ?DT?_PCA_INIT?PCA
+   *DEL*:           00000EH   BYTE   UNIT     CODE           ?PR?BITTIME?SOFT_UART
+   *DEL*:           000033H   BYTE   UNIT     CODE           ?PR?_TXSEND?SOFT_UART
+   *DEL*:           000018H   BYTE   UNIT     CODE           ?PR?_PRINTSTRING?SOFT_UART
+   *DEL*:           000025H   BYTE   UNIT     CODE           ?PR?_LOG?SOFT_UART
+   *DEL*:           000015H   BYTE   UNIT     DATA           ?DT?_LOG?SOFT_UART
+   *DEL*:           000008H   BYTE   UNIT     CODE           ?PR?_PUTCHAR?SOFT_UART
+   *DEL*:           00001DH   BYTE   UNIT     CODE           ?PR?DELAYINIT?DELAY
+   *DEL*:           000008H   BYTE   UNIT     DATA           ?DT?DELAYINIT?DELAY
+   *DEL*:           00009BH   BYTE   UNIT     CODE           ?PR?_DELAYMS?DELAY
+   *DEL*:           000004H   BYTE   UNIT     DATA           ?DT?_DELAYMS?DELAY
+   *DEL*:           0001CAH   BYTE   UNIT     CODE           ?PR?_TIMER_INILIZE?TIMER
+   *DEL*:           00001FH   BYTE   UNIT     CODE           ?PR?TM1620SHOWBYBUFFER?TM1620
+   *DEL*:           00001CH   BYTE   UNIT     CODE           ?PR?TM1620SHOWFOUR?TM1620
+   *DEL*:           000025H   BYTE   UNIT     CODE           ?PR?_VPRINTF?VPRINTF
+   *DEL*:           000003H   BYTE   UNIT     DATA           ?DT?_VPRINTF?VPRINTF
+   *DEL*:           00046FH   BYTE   UNIT     CODE           ?PR?PRINTF?PRINTF
+   *DEL*:           00001CH   BYTE   UNIT     DATA           ?DT?PRINTF?PRINTF
+   *DEL*:           000001H.1 BIT    UNIT     BIT            ?BI?PRINTF?PRINTF
+
+
+
+OVERLAY MAP OF MODULE:   .\BUILD\RELEASE\TEMP (ADC)
+
+
+FUNCTION/MODULE                  BIT_GROUP   DATA_GROUP 
+--> CALLED FUNCTION/MODULE      START  STOP  START  STOP
+========================================================
+PCA_HANDLER/PCA                 ----- -----  ----- -----
+
+*** NEW ROOT ******************
+
+?C_C51STARTUP                   ----- -----  ----- -----
+  +--> MAIN/MAIN
+  +--> ?C_INITSEG
+
+MAIN/MAIN                       ----- -----  0028H 002EH
+LX51 LINKER/LOCATER V4.66.93.0                                                        06/05/2022  11:01:31  PAGE 4
+
+
+  +--> _DELAY_MS/DELAY
+  +--> TM1620INIT/TM1620
+  +--> TM1620TEST/TM1620
+  +--> GETTEMP/DS18B20
+  +--> _TM1620SHOWBYADDR/TM1620
+
+_DELAY_MS/DELAY                 ----- -----  ----- -----
+
+TM1620INIT/TM1620               ----- -----  ----- -----
+  +--> _DELAY_MS/DELAY
+  +--> _TM1620WRITECMD/TM1620
+  +--> TM1620END/TM1620
+
+_TM1620WRITECMD/TM1620          ----- -----  ----- -----
+  +--> _TM1620WRITEDATA/TM1620
+  +--> _TMDELAYUS/TM1620
+
+_TM1620WRITEDATA/TM1620         ----- -----  ----- -----
+  +--> _TMDELAYUS/TM1620
+
+_TMDELAYUS/TM1620               ----- -----  ----- -----
+
+TM1620END/TM1620                ----- -----  ----- -----
+
+TM1620TEST/TM1620               ----- -----  ----- -----
+  +--> _TM1620SHOWBYADDR/TM1620
+
+_TM1620SHOWBYADDR/TM1620        ----- -----  ----- -----
+  +--> _TM1620WRITEDATA/TM1620
+  +--> _TMDELAYUS/TM1620
+  +--> TM1620END/TM1620
+
+GETTEMP/DS18B20                 ----- -----  ----- -----
+  +--> DS1B20CT/DS18B20
+  +--> DS1B20READCMD/DS18B20
+  +--> DS18B20READ/DS18B20
+
+DS1B20CT/DS18B20                ----- -----  ----- -----
+  +--> DS18B20INIT/DS18B20
+  +--> _DS18B20WRITCMD/DS18B20
+
+DS18B20INIT/DS18B20             20H.3 20H.3  ----- -----
+  +--> _DSDELAY1XUS/DS18B20
+
+_DSDELAY1XUS/DS18B20            ----- -----  ----- -----
+
+_DS18B20WRITCMD/DS18B20         ----- -----  ----- -----
+  +--> _DSDELAY1XUS/DS18B20
+
+DS1B20READCMD/DS18B20           ----- -----  ----- -----
+  +--> DS18B20INIT/DS18B20
+  +--> _DS18B20WRITCMD/DS18B20
+
+DS18B20READ/DS18B20             ----- -----  ----- -----
+  +--> _DSDELAY1XUS/DS18B20
+
+?C_INITSEG                      ----- -----  ----- -----
+
+
+
+PUBLIC SYMBOLS OF MODULE:  .\BUILD\RELEASE\TEMP (ADC)
+
+
+      VALUE       CLASS    TYPE      PUBLIC SYMBOL NAME
+      =================================================
+LX51 LINKER/LOCATER V4.66.93.0                                                        06/05/2022  11:01:31  PAGE 5
+
+
+*DEL*:00000000H   DATA     BYTE      ?_EEPROM_read_n?BYTE
+*DEL*:00000000H   DATA     BYTE      ?_EEPROM_write_n?BYTE
+*DEL*:00000000H   DATA     BYTE      ?_LOG?BYTE
+*DEL*:00000000H   DATA     ---       ?_PRINTF?BYTE
+*DEL*:00000000H   DATA     ---       ?_SPRINTF?BYTE
+*DEL*:0000FFFDH   DATA     ---       ?_VPRINTF?BYTE
+      0100027AH   CODE     ---       ?C?CASTF
+      01000720H   CODE     ---       ?C?CCASE
+      01000556H   CODE     ---       ?C?CLDOPTR
+      0100053DH   CODE     ---       ?C?CLDPTR
+      00000000H   NUMBER   ---       ?C?CODESEG
+      01000583H   CODE     ---       ?C?CSTPTR
+      01000246H   CODE     ---       ?C?FCASTC
+      01000241H   CODE     ---       ?C?FCASTI
+      0100023CH   CODE     ---       ?C?FCASTL
+      01000045H   CODE     ---       ?C?FPADD
+      0100032AH   CODE     ---       ?C?FPCONVERT
+      01000430H   CODE     ---       ?C?FPDIV
+      010002B1H   CODE     ---       ?C?FPGETOPN2
+      01000136H   CODE     ---       ?C?FPMUL
+      010002E6H   CODE     ---       ?C?FPNANRESULT
+      010002F0H   CODE     ---       ?C?FPOVERFLOW
+      010002C8H   CODE     ---       ?C?FPRESULT
+      010002DCH   CODE     ---       ?C?FPRESULT2
+      010002FBH   CODE     ---       ?C?FPROUND
+      01000041H   CODE     ---       ?C?FPSUB
+      010002EDH   CODE     ---       ?C?FPUNDERFLOW
+      010004FDH   CODE     ---       ?C?FTNPWR
+      010005FCH   CODE     ---       ?C?ILDOPTR
+      01000595H   CODE     ---       ?C?IMUL
+      01000746H   CODE     ---       ?C?LIMUL
+      01000702H   CODE     ---       ?C?LNEG
+      01000710H   CODE     ---       ?C?PLDIIDATA
+      010005A7H   CODE     ---       ?C?UIDIV
+      01000670H   CODE     ---       ?C?ULDIV
+      00000000H   NUMBER   ---       ?C?XDATASEG
+      0100088CH   CODE     ---       ?C_START
+      01000000H   CODE     ---       ?C_STARTUP
+*DEL*:00000000H   CODE     ---       _ADC_Inilize
+*DEL*:00000000H   CODE     ---       _ADC_PowerControl
+      01000A6BH   CODE     ---       _delay_ms
+*DEL*:00000000H   CODE     ---       _Delayms
+      0100000CH   CODE     ---       _DS18B20WritCmd
+      01000A1CH   CODE     ---       _dsdelay1xus
+*DEL*:00000000H   CODE     ---       _EEPROM_read_n
+*DEL*:00000000H   CODE     ---       _EEPROM_SectorErase
+*DEL*:00000000H   CODE     ---       _EEPROM_write_n
+*DEL*:00000000H   CODE     ---       _Ext_Inilize
+*DEL*:00000000H   CODE     ---       _Get_ADC10bitResult
+*DEL*:00000000H   CODE     ---       _GPIO_Inilize
+      00000021H   DATA     WORD      _lastReloadVal
+*DEL*:00000000H   CODE     ---       _LOG
+      00000024H   DATA     WORD      _loopCount
+      00000026H   DATA     WORD      _loopMax
+*DEL*:00000000H   CODE     ---       _PCA_Init
+*DEL*:00000062H   CODE     ---       _PRINTF
+*DEL*:00000000H   CODE     ---       _PrintString
+*DEL*:00000000H   CODE     ---       _putchar
+*DEL*:00000000H   CODE     ---       _PWMn_Update
+*DEL*:0000005CH   CODE     ---       _SPRINTF
+*DEL*:00000000H   CODE     ---       _Timer_Inilize
+      01000A57H   CODE     ---       _TM1620ShowByAddr
+      01000A96H   CODE     ---       _TM1620WriteCmd
+      0100097BH   CODE     ---       _TM1620WriteData
+      01000A47H   CODE     ---       _TMDelayUs
+LX51 LINKER/LOCATER V4.66.93.0                                                        06/05/2022  11:01:31  PAGE 6
+
+
+*DEL*:00000000H   CODE     ---       _TxSend
+      00000023H   DATA     BYTE      _unit
+*DEL*:00000000H   CODE     ---       _VPRINTF
+      00000020H.0 BIT      BIT       B_Capture0
+      00000020H.1 BIT      BIT       B_Capture1
+      00000020H.2 BIT      BIT       B_Capture2
+*DEL*:00000000H   CODE     ---       BitTime
+      00000017H   DATA     WORD      CCAP0_tmp
+      00000019H   DATA     WORD      CCAP1_tmp
+      0000001BH   DATA     WORD      CCAP2_tmp
+*DEL*:00000000H   CODE     ---       DelayInit
+*DEL*:00000000H   CODE     ---       DisableEEPROM
+      010009A6H   CODE     ---       DS18B20Init
+      01000949H   CODE     ---       DS18B20Read
+      01000A2DH   CODE     ---       DS1B20CT
+      01000A8BH   CODE     ---       DS1B20ReadCmd
+      010009FDH   CODE     ---       getTemp
+      01000AA6H   CONST    ---       LedCode
+      02000000H   XDATA    ---       LedShowBuffer
+      01000773H   CODE     ---       main
+      00000008H   DATA     BYTE      PCA0_mode
+      00000009H   DATA     BYTE      PCA1_mode
+      0000000AH   DATA     BYTE      PCA2_mode
+      010008D1H   CODE     ---       PCA_Handler
+      00000011H   DATA     WORD      PCA_Timer0
+      00000013H   DATA     WORD      PCA_Timer1
+      00000015H   DATA     WORD      PCA_Timer2
+      0000000BH   DATA     WORD      PWM0_low
+      0000000DH   DATA     WORD      PWM1_low
+      0000000FH   DATA     WORD      PWM2_low
+      01000A9FH   CODE     ---       TM1620End
+      010009C4H   CODE     ---       TM1620Init
+*DEL*:00000000H   CODE     ---       TM1620ShowByBuffer
+*DEL*:00000000H   CODE     ---       TM1620ShowFour
+      010009E1H   CODE     ---       TM1620Test
+
+
+
+SYMBOL TABLE OF MODULE:  .\BUILD\RELEASE\TEMP (ADC)
+
+      VALUE       REP       CLASS    TYPE      SYMBOL NAME
+      ====================================================
+      ---         MODULE    ---      ---       ADC
+      00000004H   SYMBOL    DATA     VOID      adc
+      00000003H   SYMBOL    DATA     VOID      i
+
+      ---         MODULE    ---      ---       EEPROM
+
+      ---         MODULE    ---      ---       EXTI
+
+      ---         MODULE    ---      ---       GPIO
+
+      ---         MODULE    ---      ---       PCA
+      0000001BH   PUBLIC    DATA     WORD      CCAP2_tmp
+      00000019H   PUBLIC    DATA     WORD      CCAP1_tmp
+      00000017H   PUBLIC    DATA     WORD      CCAP0_tmp
+      00000015H   PUBLIC    DATA     WORD      PCA_Timer2
+      00000013H   PUBLIC    DATA     WORD      PCA_Timer1
+      00000011H   PUBLIC    DATA     WORD      PCA_Timer0
+      0000000FH   PUBLIC    DATA     WORD      PWM2_low
+      0000000DH   PUBLIC    DATA     WORD      PWM1_low
+      0000000BH   PUBLIC    DATA     WORD      PWM0_low
+      00000020H.2 PUBLIC    BIT      BIT       B_Capture2
+      00000020H.1 PUBLIC    BIT      BIT       B_Capture1
+      00000020H.0 PUBLIC    BIT      BIT       B_Capture0
+LX51 LINKER/LOCATER V4.66.93.0                                                        06/05/2022  11:01:31  PAGE 7
+
+
+      0000000AH   PUBLIC    DATA     BYTE      PCA2_mode
+      00000009H   PUBLIC    DATA     BYTE      PCA1_mode
+      00000008H   PUBLIC    DATA     BYTE      PCA0_mode
+      010008D1H   PUBLIC    CODE     ---       PCA_Handler
+
+      010008D1H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      ---         MODULE    ---      ---       SOFT_UART
+      00000006H   SYMBOL    DATA     VOID      i
+      00000004H   SYMBOL    DATA     VOID      i
+
+      ---         MODULE    ---      ---       USART
+
+      ---         MODULE    ---      ---       DELAY
+      00000026H   PUBLIC    DATA     WORD      _loopMax
+      00000024H   PUBLIC    DATA     WORD      _loopCount
+      00000023H   PUBLIC    DATA     BYTE      _unit
+      00000021H   PUBLIC    DATA     WORD      _lastReloadVal
+      01000A6BH   PUBLIC    CODE     ---       _delay_ms
+
+      01000A6BH   BLOCK     CODE     ---       LVL=0
+      01000A6BH   BLOCK     CODE     NEAR LAB  LVL=1
+      00000004H   SYMBOL    DATA     VOID      i
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      ---         MODULE    ---      ---       TIMER
+
+      ---         MODULE    ---      ---       DS18B20
+      010009FDH   PUBLIC    CODE     ---       getTemp
+      01000A8BH   PUBLIC    CODE     ---       DS1B20ReadCmd
+      01000A2DH   PUBLIC    CODE     ---       DS1B20CT
+      01000949H   PUBLIC    CODE     ---       DS18B20Read
+      0100000CH   PUBLIC    CODE     ---       _DS18B20WritCmd
+      010009A6H   PUBLIC    CODE     ---       DS18B20Init
+      01000A1CH   PUBLIC    CODE     ---       _dsdelay1xus
+
+      01000A16H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000A1CH   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      010009A6H   BLOCK     CODE     ---       LVL=0
+      010009A6H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000020H.3 SYMBOL    BIT      VOID      stat
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000003H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      0100000CH   BLOCK     CODE     ---       LVL=0
+      0100000EH   BLOCK     CODE     NEAR LAB  LVL=1
+      00000003H   SYMBOL    DATA     VOID      i
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000949H   BLOCK     CODE     ---       LVL=0
+      01000949H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000005H   SYMBOL    DATA     VOID      i
+      00000003H   SYMBOL    DATA     VOID      dat
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+LX51 LINKER/LOCATER V4.66.93.0                                                        06/05/2022  11:01:31  PAGE 8
+
+
+
+      01000A2DH   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000A8BH   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      010009FDH   BLOCK     CODE     ---       LVL=0
+      010009FDH   BLOCK     CODE     NEAR LAB  LVL=1
+      00000002H   SYMBOL    DATA     VOID      LSB
+      00000007H   SYMBOL    DATA     VOID      MSB
+      00000006H   SYMBOL    DATA     VOID      temp
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      ---         MODULE    ---      ---       MAIN
+      01000773H   PUBLIC    CODE     ---       main
+
+      01000773H   BLOCK     CODE     ---       LVL=0
+      01000773H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000028H   SYMBOL    DATA     VOID      temp
+      0000002AH   SYMBOL    DATA     VOID      l1
+      0000002BH   SYMBOL    DATA     VOID      l2
+      0000002CH   SYMBOL    DATA     VOID      l3
+      0000002DH   SYMBOL    DATA     VOID      l4
+      0000002EH   SYMBOL    DATA     VOID      hide
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      ---         MODULE    ---      ---       TM1620
+      02000000H   PUBLIC    XDATA    ---       LedShowBuffer
+      01000AA6H   PUBLIC    CONST    ---       LedCode
+      010009E1H   PUBLIC    CODE     ---       TM1620Test
+      010009C4H   PUBLIC    CODE     ---       TM1620Init
+      01000A9FH   PUBLIC    CODE     ---       TM1620End
+      01000A57H   PUBLIC    CODE     ---       _TM1620ShowByAddr
+      01000A96H   PUBLIC    CODE     ---       _TM1620WriteCmd
+      0100097BH   PUBLIC    CODE     ---       _TM1620WriteData
+      01000A47H   PUBLIC    CODE     ---       _TMDelayUs
+
+      01000A43H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000A47H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      0100097BH   BLOCK     CODE     ---       LVL=0
+      0100097DH   BLOCK     CODE     NEAR LAB  LVL=1
+      00000004H   SYMBOL    DATA     VOID      i
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000A96H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+      00000003H   SYMBOL    DATA     VOID      i
+
+      01000A57H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000A9FH   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      010009C4H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+LX51 LINKER/LOCATER V4.66.93.0                                                        06/05/2022  11:01:31  PAGE 9
+
+
+      010009E1H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      ---         MODULE    ---      ---       ?C?FPADD
+      01000045H   PUBLIC    CODE     ---       ?C?FPADD
+      01000041H   PUBLIC    CODE     ---       ?C?FPSUB
+
+      ---         MODULE    ---      ---       ?C?FPMUL
+      01000136H   PUBLIC    CODE     ---       ?C?FPMUL
+
+      ---         MODULE    ---      ---       ?C?FCAST
+      01000246H   PUBLIC    CODE     ---       ?C?FCASTC
+      01000241H   PUBLIC    CODE     ---       ?C?FCASTI
+      0100023CH   PUBLIC    CODE     ---       ?C?FCASTL
+
+      ---         MODULE    ---      ---       ?C?CASTF
+      0100027AH   PUBLIC    CODE     ---       ?C?CASTF
+
+      ---         MODULE    ---      ---       VPRINTF
+
+      ---         MODULE    ---      ---       ?C?FPGETOPN
+      010002B1H   PUBLIC    CODE     ---       ?C?FPGETOPN2
+      010002E6H   PUBLIC    CODE     ---       ?C?FPNANRESULT
+      010002F0H   PUBLIC    CODE     ---       ?C?FPOVERFLOW
+      010002C8H   PUBLIC    CODE     ---       ?C?FPRESULT
+      010002DCH   PUBLIC    CODE     ---       ?C?FPRESULT2
+      010002EDH   PUBLIC    CODE     ---       ?C?FPUNDERFLOW
+
+      ---         MODULE    ---      ---       PRINTF
+
+      ---         MODULE    ---      ---       ?C?FPROUND
+      010002FBH   PUBLIC    CODE     ---       ?C?FPROUND
+
+      ---         MODULE    ---      ---       ?C?FPCONVERT
+      0100032AH   PUBLIC    CODE     ---       ?C?FPCONVERT
+
+      ---         MODULE    ---      ---       ?C?FPDIV
+      01000430H   PUBLIC    CODE     ---       ?C?FPDIV
+
+      ---         MODULE    ---      ---       ?C?FTNPWR
+      010004FDH   PUBLIC    CODE     ---       ?C?FTNPWR
+
+      ---         MODULE    ---      ---       ?C_STARTUP
+      01000000H   PUBLIC    CODE     ---       ?C_STARTUP
+
+      ---         MODULE    ---      ---       ?C?CLDPTR
+      0100053DH   PUBLIC    CODE     ---       ?C?CLDPTR
+
+      ---         MODULE    ---      ---       ?C?CLDOPTR
+      01000556H   PUBLIC    CODE     ---       ?C?CLDOPTR
+
+      ---         MODULE    ---      ---       ?C?CSTPTR
+      01000583H   PUBLIC    CODE     ---       ?C?CSTPTR
+
+      ---         MODULE    ---      ---       ?C?IMUL
+      01000595H   PUBLIC    CODE     ---       ?C?IMUL
+
+      ---         MODULE    ---      ---       ?C?UIDIV
+      010005A7H   PUBLIC    CODE     ---       ?C?UIDIV
+
+      ---         MODULE    ---      ---       ?C?ILDOPTR
+      010005FCH   PUBLIC    CODE     ---       ?C?ILDOPTR
+
+      ---         MODULE    ---      ---       ?C?ULDIV
+      01000670H   PUBLIC    CODE     ---       ?C?ULDIV
+LX51 LINKER/LOCATER V4.66.93.0                                                        06/05/2022  11:01:31  PAGE 10
+
+
+
+      ---         MODULE    ---      ---       ?C?LNEG
+      01000702H   PUBLIC    CODE     ---       ?C?LNEG
+
+      ---         MODULE    ---      ---       ?C?PLDIIDATA
+      01000710H   PUBLIC    CODE     ---       ?C?PLDIIDATA
+
+      ---         MODULE    ---      ---       ?C?CCASE
+      01000720H   PUBLIC    CODE     ---       ?C?CCASE
+
+      ---         MODULE    ---      ---       ?C?LIMUL
+      01000746H   PUBLIC    CODE     ---       ?C?LIMUL
+
+      ---         MODULE    ---      ---       ?C_INIT
+      0100088CH   PUBLIC    CODE     ---       ?C_START
+
+Program Size: data=44.4 xdata=12 const=18 code=2722
+LX51 RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

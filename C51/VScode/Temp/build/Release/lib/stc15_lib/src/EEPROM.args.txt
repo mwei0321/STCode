@@ -1,0 +1,1 @@
+.\lib\stc15_lib\src\EEPROM.c PRINT(.\build\Release\lib\stc15_lib\src\EEPROM.lst) OMF2 TABS(4) CODE NOCOND SYMBOLS OPTIMIZE(8,SPEED) SMALL ROM(LARGE) INCDIR(D:\PhPython\Keil5\C51\INC;.\src;.\lib\stc15_lib;.\lib\stc15_lib\src;.\lib\stc15_lib\include) DEFINE(DEBUG,__UVISION_VERSION='526') OBJECT(.\build\Release\lib\stc15_lib\src\EEPROM.o)

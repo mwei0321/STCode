@@ -1,0 +1,3 @@
+
+.\build\Release\lib\stc15_lib\src\ADC.o,.\build\Release\lib\stc15_lib\src\EEPROM.o,.\build\Release\lib\stc15_lib\src\Exti.o,.\build\Release\lib\stc15_lib\src\GPIO.o,.\build\Release\lib\stc15_lib\src\PCA.o,.\build\Release\lib\stc15_lib\src\Soft_UART.o,.\build\Release\lib\stc15_lib\src\USART.o,.\build\Release\lib\stc15_lib\src\delay.o,.\build\Release\lib\stc15_lib\src\timer.o,.\build\Release\src\ds18b20.o,.\build\Release\src\main.o,.\build\Release\src\tm1620.o TO .\build\Release\Temp
+PRINT(.\build\Release\Temp.map) REMOVEUNUSED

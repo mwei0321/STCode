@@ -1,0 +1,70 @@
+{
+    "name": "Temp",
+    "target": "Release",
+    "toolchain": "Keil_C51",
+    "toolchainLocation": "D:\\PhPython\\Keil5\\C51",
+    "toolchainCfgFile": "..\\cfg\\8051.keil.model.json",
+    "buildMode": "normal|multhread",
+    "showRepathOnLog": true,
+    "threadNum": 12,
+    "rootDir": "f:\\STCode\\C51\\VScode\\Temp",
+    "dumpPath": "build\\Release",
+    "outDir": "build\\Release",
+    "incDirs": [
+        "D:\\PhPython\\Keil5\\C51\\INC",
+        "src",
+        "lib/stc15_lib",
+        "lib/stc15_lib/src",
+        "lib/stc15_lib/include"
+    ],
+    "libDirs": [],
+    "defines": [
+        "DEBUG",
+        "__UVISION_VERSION=526"
+    ],
+    "sourceList": [
+        "lib/stc15_lib/src/ADC.c",
+        "lib/stc15_lib/src/EEPROM.c",
+        "lib/stc15_lib/src/Exti.c",
+        "lib/stc15_lib/src/GPIO.c",
+        "lib/stc15_lib/src/PCA.c",
+        "lib/stc15_lib/src/Soft_UART.c",
+        "lib/stc15_lib/src/USART.C",
+        "lib/stc15_lib/src/delay.c",
+        "lib/stc15_lib/src/timer.c",
+        "src/ds18b20.c",
+        "src/main.c",
+        "src/tm1620.c"
+    ],
+    "sourceParams": {},
+    "sourceParamsMtime": 1649576970870.673,
+    "options": {
+        "beforeBuildTasks": [],
+        "afterBuildTasks": [],
+        "global": {
+            "ram-mode": "SMALL",
+            "rom-mode": "LARGE"
+        },
+        "c/cpp-compiler": {
+            "optimization-type": "SPEED",
+            "optimization-level": "level-8",
+            "optimization": "8,SPEED"
+        },
+        "asm-compiler": {},
+        "linker": {
+            "remove-unused": true,
+            "output-format": "elf",
+            "use-RTX": "None"
+        },
+        "version": 2
+    },
+    "sha": {
+        "c/cpp-defines": "08ba90ce767babad43b43ad24e38dc27",
+        "beforeBuildTasks": "d751713988987e9331980363e24189ce",
+        "afterBuildTasks": "d751713988987e9331980363e24189ce",
+        "global": "c16529a49a409094a87f0219fb297e41",
+        "c/cpp-compiler": "d6401cb3a45dab99a8d0301dd2b94e32",
+        "asm-compiler": "99914b932bd37a50b983c5e7c90ae93b",
+        "linker": "15a323ec34b82176433e3f27b0ac0ffb"
+    }
+}
